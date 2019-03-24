@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:almaty_metro/stations.dart';
 
 class BottomPanel extends StatefulWidget {
-  final Function(int stationIndex, int directionIndex) onChange;
+  final Function(int departureStationIndex, int arrivalStationIndex) onChange;
 
   const BottomPanel({Key key, this.onChange}) : super(key: key);
   @override
@@ -12,49 +12,34 @@ class BottomPanel extends StatefulWidget {
 }
 
 class _BottomPanelState extends State<BottomPanel> {
-  int _stationIndex = 0;
-  int _direction = 1;
-  List<int> _availableDirections = [1];
+  int _departureStationIndex = 0;
+  int _arrivalStationIndex = 8;
 
-  _onStationLeftPress() {
+  _onArrivalStationLeftPress() {
     setState(() {
-      _stationIndex--;
-
-      if (_stationIndex == 0) {
-        _availableDirections = [1];
-        _direction = 1;
-      } else {
-        _availableDirections = [0, 1];
-      }
-      widget.onChange(_stationIndex, _direction);
+      _arrivalStationIndex--;
+      widget.onChange(_departureStationIndex, _arrivalStationIndex);
     });
   }
 
-  _onStationRightPress() {
+  _onArrivalStationRightPress() {
     setState(() {
-      _stationIndex++;
-
-      if (_stationIndex == stations.length - 1) {
-        _availableDirections = [0];
-        _direction = 0;
-      } else {
-        _availableDirections = [0, 1];
-      }
-      widget.onChange(_stationIndex, _direction);
+      _arrivalStationIndex++;
+      widget.onChange(_departureStationIndex, _arrivalStationIndex);
     });
   }
 
-  _onDirectionLeftPress() {
+  _onDepartureStationLeftPress() {
     setState(() {
-      _direction--;
-      widget.onChange(_stationIndex, _direction);
+      _departureStationIndex--;
+      widget.onChange(_departureStationIndex, _arrivalStationIndex);
     });
   }
 
-  _onDirectionRightPress() {
+  _onDepartureStationRightPress() {
     setState(() {
-      _direction++;
-      widget.onChange(_stationIndex, _direction);
+      _departureStationIndex++;
+      widget.onChange(_departureStationIndex, _arrivalStationIndex);
     });
   }
 
@@ -67,12 +52,12 @@ class _BottomPanelState extends State<BottomPanel> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           IconTextWidget(
-            title: stations[_stationIndex],
-            subtitle: 'Станция',
+            title: stations[_departureStationIndex],
+            subtitle: 'Со станции',
             icon: Icons.subway,
             isTop: true,
-            onLeftPress: _stationIndex > 0 ? _onStationLeftPress : null,
-            onRightPress: _stationIndex < stations.length - 1 ? _onStationRightPress : null,
+            onLeftPress: _departureStationIndex > 0 ? _onDepartureStationLeftPress : null,
+            onRightPress: _departureStationIndex < stations.length - 1 ? _onDepartureStationRightPress : null,
           ),
           Container(
             width: double.infinity,
@@ -80,14 +65,12 @@ class _BottomPanelState extends State<BottomPanel> {
             color: Colors.black.withOpacity(0.05),
           ),
           IconTextWidget(
-            title: directions[_direction],
-            subtitle: 'В сторону',
+            title: stations[_arrivalStationIndex],
+            subtitle: 'На станцию',
             icon: Icons.directions,
             isTop: false,
-            onLeftPress: (_direction > 0 && _availableDirections.length > 1) ? _onDirectionLeftPress : null,
-            onRightPress: (_direction < directions.length - 1 && _availableDirections.length > 1)
-                ? _onDirectionRightPress
-                : null,
+            onLeftPress: _arrivalStationIndex > 0 ? _onArrivalStationLeftPress : null,
+            onRightPress: _arrivalStationIndex < stations.length - 1 ? _onArrivalStationRightPress : null,
           ),
         ],
       ),

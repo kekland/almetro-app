@@ -62,55 +62,37 @@ class _ArrivalTimesListWidgetState extends State<ArrivalTimesListWidget> {
     Text secondText = (passed) ? Text('проехал', style: style) : Text(text, style: style);
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
-      child: Row(
-        children: [
-          Text(
-            '${dateTimeToHourOfDayString(time)}',
-            style: (passed)
-                ? TextStyle(
-                    color: Colors.black38,
-                    fontSize: 18.0,
-                  )
-                : TextStyle(
-                    color: (currentIndex == index) ? Colors.red : Colors.black,
-                    fontSize: 18.0,
-                    fontWeight: (currentIndex == index) ? FontWeight.w600 : FontWeight.w400,
-                  ),
-          ),
-          Expanded(child: SizedBox()),
-          secondText,
-        ],
+      child: CardWidget(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Text(
+              '${dateTimeToHourOfDayString(time)}',
+              style: (passed)
+                  ? TextStyle(
+                      color: Colors.black38,
+                      fontSize: 18.0,
+                    )
+                  : TextStyle(
+                      color: (currentIndex == index) ? Colors.red : Colors.black,
+                      fontSize: 18.0,
+                      fontWeight: (currentIndex == index) ? FontWeight.w600 : FontWeight.w400,
+                    ),
+            ),
+            Expanded(child: SizedBox()),
+            secondText,
+          ],
+        ),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return CardWidget(
-      padding: const EdgeInsets.all(0.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 0.0),
-            child: Text(
-              'Расписание',
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-                controller: controller,
-                padding: const EdgeInsets.all(16.0),
-                itemCount: widget.arrivalTimes.length,
-                itemBuilder: (context, index) => _buildRow(index),
-                physics: BouncingScrollPhysics()),
-          ),
-        ],
-      ),
-    );
+    return ListView.builder(
+        controller: controller,
+        itemCount: widget.arrivalTimes.length,
+        itemBuilder: (context, index) => _buildRow(index),
+        physics: BouncingScrollPhysics());
   }
 }
