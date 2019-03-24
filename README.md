@@ -4,7 +4,7 @@ Tracking subway trains in Almaty made easy.
 
 ## Download
 
-Play Market: **soon**
+Play Market: [Link](https://play.google.com/store/apps/details?id=com.kekland.almetro)
 
 ## Debugging
 
@@ -14,9 +14,7 @@ flutter run
 
 ## Screenshots
 
-![Screenshot 1](./screenshots/Screenshot_20190324-213956.jpg)
-
-![Screenshot 1](./screenshots/Screenshot_20190324-214008.jpg)
+![Screenshot 1](./screenshots/Screenshot_20190324-213956.jpg) ![Screenshot 2](./screenshots/Screenshot_20190324-214008.jpg)
 
 ## Contact me
 
