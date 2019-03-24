@@ -156,7 +156,7 @@ class _MainPageState extends State<MainPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Метро.Алматы',
+                        'Almetro',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18.0,
