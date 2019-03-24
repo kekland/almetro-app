@@ -4,6 +4,7 @@ class CardWidget extends StatefulWidget {
   final Widget child;
   final EdgeInsets padding;
   final VoidCallback onClick;
+  final bool fluid;
   /*
       duration: Duration(milliseconds: 750),
       curve: Curves.easeInOut,
@@ -21,7 +22,7 @@ class CardWidget extends StatefulWidget {
         ],
       ),*/
 
-  const CardWidget({Key key, this.child, this.padding, this.onClick}) : super(key: key);
+  const CardWidget({Key key, this.child, this.padding, this.onClick, this.fluid}) : super(key: key);
 
   @override
   _CardWidgetState createState() => _CardWidgetState();
@@ -31,6 +32,7 @@ class _CardWidgetState extends State<CardWidget> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
         color: Colors.white,
