@@ -13,8 +13,11 @@ flutter run
 ```
 
 ## Screenshots
+Screenshot 1               |  Screenshot 2
+:-------------------------:|:-------------------------:
+![Screenshot 1](./screenshots/Screenshot_20190324-213956.jpg)  |  ![Screenshot 2](./screenshots/Screenshot_20190324-214008.jpg)
 
-![Screenshot 1](./screenshots/Screenshot_20190324-213956.jpg) ![Screenshot 2](./screenshots/Screenshot_20190324-214008.jpg)
+ 
 
 ## Contact me
 
