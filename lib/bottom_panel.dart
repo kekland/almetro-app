@@ -5,14 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:almaty_metro/stations.dart';
 
 class BottomPanel extends StatefulWidget {
+  final Function(int stationIndex, int directionIndex) onChange;
+
+  const BottomPanel({Key key, this.onChange}) : super(key: key);
   @override
   _BottomPanelState createState() => _BottomPanelState();
 }
 
 class _BottomPanelState extends State<BottomPanel> {
   int _stationIndex = 0;
-  int _direction = 0;
-  List<int> _availableDirections = [0, 1];
+  int _direction = 1;
+  List<int> _availableDirections = [1];
 
   _onStationLeftPress() {
     setState(() {
@@ -24,6 +27,7 @@ class _BottomPanelState extends State<BottomPanel> {
       } else {
         _availableDirections = [0, 1];
       }
+      widget.onChange(_stationIndex, _direction);
     });
   }
 
@@ -37,18 +41,21 @@ class _BottomPanelState extends State<BottomPanel> {
       } else {
         _availableDirections = [0, 1];
       }
+      widget.onChange(_stationIndex, _direction);
     });
   }
 
   _onDirectionLeftPress() {
     setState(() {
       _direction--;
+      widget.onChange(_stationIndex, _direction);
     });
   }
 
   _onDirectionRightPress() {
     setState(() {
       _direction++;
+      widget.onChange(_stationIndex, _direction);
     });
   }
 

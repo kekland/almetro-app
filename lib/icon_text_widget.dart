@@ -77,7 +77,7 @@ class _IconTextWidgetState extends State<IconTextWidget> with SingleTickerProvid
       swipeConfiguration: SwipeConfiguration(
         horizontalSwipeMaxHeightThreshold: 50.0,
         horizontalSwipeMinDisplacement:25.0,
-        horizontalSwipeMinVelocity: 200.0
+        horizontalSwipeMinVelocity: 150.0
       ),
       child: Container(
         decoration: BoxDecoration(
