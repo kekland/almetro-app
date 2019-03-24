@@ -1,16 +1,23 @@
-# almaty_metro
+# almaty_metro (Almetro)
 
-A new Flutter project.
+Tracking subway trains in Almaty made easy.
 
-## Getting Started
+## Download
 
-This project is a starting point for a Flutter application.
+Play Market: **soon**
 
-A few resources to get you started if this is your first Flutter project:
+## Debugging
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+```bash
+flutter run
+```
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
+
+![Screenshot 1](./screenshots/Screenshot_20190324-213956.jpg)
+
+![Screenshot 1](./screenshots/Screenshot_20190324-214008.jpg)
+
+## Contact me
+
+E-Mail: **kk.erzhan@gmail.com**
