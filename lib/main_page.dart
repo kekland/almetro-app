@@ -3,6 +3,7 @@ import 'package:almaty_metro/bottom_panel.dart';
 import 'package:almaty_metro/card_widget.dart';
 import 'package:almaty_metro/departure_arrival_widgets.dart';
 import 'package:almaty_metro/icon_content_widget.dart';
+import 'package:almaty_metro/info_page.dart';
 import 'package:almaty_metro/next_train_widget.dart';
 import 'package:almaty_metro/time.dart';
 import 'package:almaty_metro/time_calculator.dart';
@@ -152,11 +153,24 @@ class _MainPageState extends State<MainPage> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16.0, right: 8.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Text(
+                        'Метро.Алматы',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                       IconButton(
                         icon: Icon(Icons.info, color: Colors.white),
-                        onPressed: () {},
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) => InformationSheetWidget(),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -198,7 +212,6 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 16.0),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: BottomPanel(
