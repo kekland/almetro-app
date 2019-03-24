@@ -6,10 +6,15 @@ List<String> stations = [
   "Байконур",
   "Абая",
   "Алмалы",
-  "Жибек жолы",
-  "Райымбек батыра"
+  "Жибек Жолы",
+  "Райымбек Батыра"
 ];
 
 String getStation(int index) {
   return stations[index];
 }
+
+List<String> directions = [
+  "Москвы",
+  "Райымбек Батыра",
+];
