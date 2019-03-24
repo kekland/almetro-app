@@ -163,7 +163,6 @@ List<DateTime> getArrivalTimes(int stationIndex, int directionIndex) {
   int startIndex = directionIndex == 0 ? 8 : 0;
   List<DateTime> launchTimes = getLaunchTimes(startIndex);
   Duration distanceDuration = getTimeBetweenTwoStations(startIndex, stationIndex);
-  print(launchTimes);
   if (directionIndex == 1) {
     return launchTimes.map((time) => time.add(distanceDuration)).toList();
   } else {
