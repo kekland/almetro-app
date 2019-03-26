@@ -8,14 +8,25 @@ import 'package:almaty_metro/time_calculator.dart';
 import 'package:flutter/material.dart';
 
 class RouteTimerPage extends StatefulWidget {
+  const RouteTimerPage({Key key}) : super(key: key);
   @override
   _RouteTimerPageState createState() => _RouteTimerPageState();
 }
 
-class _RouteTimerPageState extends State<RouteTimerPage> {
-  int _departureStationIndex = 0;
-  int _arrivalStationIndex = 8;
-  List<DateTime> _arrivalTimes = getArrivalTimes(0, 1);
+class _RouteTimerPageState extends State<RouteTimerPage>{
+  int _departureStationIndex;
+  int _arrivalStationIndex;
+  List<DateTime> _arrivalTimes;
+
+  @override
+  initState() {
+    super.initState();
+
+    _departureStationIndex =  0;
+    _arrivalStationIndex = 8;
+
+    _arrivalTimes = getArrivalTimes(_departureStationIndex, _arrivalStationIndex);
+  }
 
   int getDirection() {
     if (_arrivalStationIndex > _departureStationIndex) {
@@ -44,6 +55,7 @@ class _RouteTimerPageState extends State<RouteTimerPage> {
     Duration difference = closest.difference(now);
 
     Future.delayed(Duration(seconds: 1), () {
+      if (!mounted) return;
       setState(() {});
     });
 
@@ -103,6 +115,8 @@ class _RouteTimerPageState extends State<RouteTimerPage> {
                 _departureStationIndex = departureStationIndex;
                 _arrivalStationIndex = arrivalStationIndex;
                 _arrivalTimes = getArrivalTimes(departureStationIndex, getDirection());
+                //PageStorage.of(context)?.writeState(context, departureStationIndex, identifier: 'departureStationIndex');
+                //PageStorage.of(context)?.writeState(context, arrivalStationIndex, identifier: 'arrivalStationIndex');
               });
             },
           ),

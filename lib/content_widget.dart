@@ -9,22 +9,28 @@ class AppContentWidget extends StatefulWidget {
 
 class _AppContentWidgetState extends State<AppContentWidget> {
   PageController pageViewController;
+  int initialPage = 0;
+  double currentPageAnimationValue = 0;
+
+  List<Widget> pages = [RouteTimerPage(), ArrivalsPage()];
 
   @override
   void initState() {
-    pageViewController = PageController(keepPage: true);
+    pageViewController = PageController(keepPage: true, initialPage: 0);
+    pageViewController.addListener(() {
+      setState(() {
+        currentPageAnimationValue = pageViewController.page;
+      });
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return PageView(
-      physics: BouncingScrollPhysics(),
       controller: pageViewController,
-      children: [
-        RouteTimerPage(),
-        ArrivalsPage(),
-      ],
+      physics: BouncingScrollPhysics(),
+      children: pages,
     );
   }
 }
