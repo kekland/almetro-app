@@ -1,4 +1,4 @@
-package com.example.almaty_metro;
+package com.kekland.almetro;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

@@ -1,5 +1,5 @@
 import 'package:almaty_metro/card_widget.dart';
-import 'package:almaty_metro/icon_text_widget.dart';
+import 'package:almaty_metro/route_timer_page/station_selector_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:almaty_metro/stations.dart';
 
@@ -51,7 +51,7 @@ class _BottomPanelState extends State<BottomPanel> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          IconTextWidget(
+          StationSelectorWidget(
             title: stations[_departureStationIndex],
             subtitle: 'Со станции',
             icon: Icons.subway,
@@ -64,7 +64,7 @@ class _BottomPanelState extends State<BottomPanel> {
             height: 2.0,
             color: Colors.black.withOpacity(0.05),
           ),
-          IconTextWidget(
+          StationSelectorWidget(
             title: stations[_arrivalStationIndex],
             subtitle: 'На станцию',
             icon: Icons.directions,

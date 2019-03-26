@@ -1,7 +1,7 @@
 import 'package:swipedetector/swipedetector.dart';
 import 'package:flutter/material.dart';
 
-class IconTextWidget extends StatefulWidget {
+class StationSelectorWidget extends StatefulWidget {
   final bool isTop;
   final String subtitle;
   final String title;
@@ -9,7 +9,7 @@ class IconTextWidget extends StatefulWidget {
   final VoidCallback onLeftPress;
   final VoidCallback onRightPress;
 
-  const IconTextWidget({
+  const StationSelectorWidget({
     Key key,
     this.subtitle,
     this.title,
@@ -20,10 +20,10 @@ class IconTextWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _IconTextWidgetState createState() => _IconTextWidgetState();
+  _StationSelectorWidgetState createState() => _StationSelectorWidgetState();
 }
 
-class _IconTextWidgetState extends State<IconTextWidget> with SingleTickerProviderStateMixin {
+class _StationSelectorWidgetState extends State<StationSelectorWidget> with SingleTickerProviderStateMixin {
   AnimationController controller;
   Animation<double> animation;
   String _oldTitle = null;
@@ -41,7 +41,7 @@ class _IconTextWidgetState extends State<IconTextWidget> with SingleTickerProvid
   }
 
   @override
-  void didUpdateWidget(IconTextWidget oldWidget) {
+  void didUpdateWidget(StationSelectorWidget oldWidget) {
     if (widget.title != oldWidget.title) {
       _newTitle = widget.title;
       _oldTitle = oldWidget.title;
