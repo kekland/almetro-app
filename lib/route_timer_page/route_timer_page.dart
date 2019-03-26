@@ -8,46 +8,48 @@ import 'package:almaty_metro/time_calculator.dart';
 import 'package:flutter/material.dart';
 
 class RouteTimerPage extends StatefulWidget {
-  const RouteTimerPage({Key key}) : super(key: key);
+  final int departureStationIndex;
+  final int arrivalStationIndex;
+
+  const RouteTimerPage({Key key, this.departureStationIndex, this.arrivalStationIndex}) : super(key: key);
   @override
   _RouteTimerPageState createState() => _RouteTimerPageState();
 }
 
-class _RouteTimerPageState extends State<RouteTimerPage>{
+class _RouteTimerPageState extends State<RouteTimerPage> {
   int _departureStationIndex;
   int _arrivalStationIndex;
+
   List<DateTime> _arrivalTimes;
+  DateTime _departureTime;
+
+  @override
+  void didUpdateWidget(RouteTimerPage oldWidget) {
+    if (oldWidget.departureStationIndex != widget.departureStationIndex) {
+      _departureStationIndex = widget.departureStationIndex;
+    }
+    if (oldWidget.arrivalStationIndex != widget.arrivalStationIndex) {
+      _arrivalStationIndex = widget.arrivalStationIndex;
+    }
+
+    _arrivalTimes = getArrivalTimesBetweenStations(from: _departureStationIndex, to: _arrivalStationIndex);
+    _departureTime = getClosestArrivalTimeInList(arrivalTimes: _arrivalTimes);
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   initState() {
     super.initState();
 
-    _departureStationIndex =  0;
-    _arrivalStationIndex = 8;
+    _departureStationIndex = widget.departureStationIndex ?? 0;
+    _arrivalStationIndex = widget.arrivalStationIndex ?? 8;
 
-    _arrivalTimes = getArrivalTimes(_departureStationIndex, _arrivalStationIndex);
-  }
-
-  int getDirection() {
-    if (_arrivalStationIndex > _departureStationIndex) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  DateTime getClosestArrivalTime() {
-    DateTime now = DateTime.now();
-    for (var time in _arrivalTimes) {
-      if (now.isBefore(time)) {
-        return time;
-      }
-    }
-    return null;
+    _arrivalTimes = getArrivalTimesBetweenStations(from: _departureStationIndex, to: _arrivalStationIndex);
+    _departureTime = getClosestArrivalTimeInList(arrivalTimes: _arrivalTimes);
   }
 
   Time _getTimeUntilNextTrain() {
-    DateTime closest = getClosestArrivalTime();
+    DateTime closest = getClosestArrivalTimeInList(arrivalTimes: _arrivalTimes);
     if (closest == null) {
       throw "Метро не работает.";
     }
@@ -83,18 +85,18 @@ class _RouteTimerPageState extends State<RouteTimerPage>{
                   DepartureTimeWidget(
                     arrivalStationIndex: _arrivalStationIndex,
                     departureStationIndex: _departureStationIndex,
-                    departureTime: getClosestArrivalTime(),
+                    departureTime: _departureTime,
                   ),
                   SizedBox(height: 16.0),
                   ArrivalTimeWidget(
                     arrivalStationIndex: _arrivalStationIndex,
                     departureStationIndex: _departureStationIndex,
-                    departureTime: getClosestArrivalTime(),
+                    departureTime: _departureTime,
                   ),
                   SizedBox(height: 16.0),
                   TotalTimeWidget(
-                    departureStationIndex: _departureStationIndex,
                     arrivalStationIndex: _arrivalStationIndex,
+                    departureStationIndex: _departureStationIndex,
                   ),
                   SizedBox(height: 16.0),
                   NextTrainWidget(
@@ -105,20 +107,6 @@ class _RouteTimerPageState extends State<RouteTimerPage>{
                 ],
               ),
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: BottomPanel(
-            onChange: (int departureStationIndex, int arrivalStationIndex) {
-              setState(() {
-                _departureStationIndex = departureStationIndex;
-                _arrivalStationIndex = arrivalStationIndex;
-                _arrivalTimes = getArrivalTimes(departureStationIndex, getDirection());
-                //PageStorage.of(context)?.writeState(context, departureStationIndex, identifier: 'departureStationIndex');
-                //PageStorage.of(context)?.writeState(context, arrivalStationIndex, identifier: 'arrivalStationIndex');
-              });
-            },
           ),
         ),
       ],

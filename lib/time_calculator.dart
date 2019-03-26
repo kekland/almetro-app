@@ -1,58 +1,58 @@
 import 'dart:math';
 
-Duration getTimeBetweenTwoStations(int firstStation, int lastStation) {
-  int distance = (firstStation - lastStation).abs();
+Duration getTimeBetweenTwoStations({int from, int to}) {
+  int distance = (from - to).abs();
   if (distance == 0) {
     return Duration.zero;
   } else if (distance == 1) {
-    firstStation = min(firstStation, lastStation);
+    from = min(from, to);
 
-    if (firstStation == 0) {
+    if (from == 0) {
       // Moscow - Sairan
       return Duration(minutes: 2, seconds: 20);
-    } else if (firstStation == 1) {
+    } else if (from == 1) {
       // Sairan - Alatau
       return Duration(minutes: 3, seconds: 40);
-    } else if (firstStation == 2) {
+    } else if (from == 2) {
       // Alatau - Theater nm. after Mukhtar Auezov
       return Duration(minutes: 2, seconds: 50);
-    } else if (firstStation == 3) {
+    } else if (from == 3) {
       // Theater nm. after Mukhtar Auezov - Baikonur
       return Duration(minutes: 2, seconds: 20);
-    } else if (firstStation == 4) {
+    } else if (from == 4) {
       //Baikonur - Abay
       return Duration(minutes: 3, seconds: 10);
-    } else if (firstStation == 5) {
+    } else if (from == 5) {
       //Abay - Almaly
       return Duration(minutes: 2, seconds: 35);
-    } else if (firstStation == 6) {
+    } else if (from == 6) {
       //Almaly - Zhybek zholy
       return Duration(minutes: 2, seconds: 10);
-    } else if (firstStation == 7) {
+    } else if (from == 7) {
       //Zhybek zholy - Raimbek Batyra
       return Duration(minutes: 2, seconds: 25);
     } else {
       throw Exception("Invalid station id.");
     }
   } else {
-    int minimum = min(firstStation, lastStation);
-    int maximum = max(firstStation, lastStation);
+    int minimum = min(from, to);
+    int maximum = max(from, to);
 
     Duration totalDuration = Duration();
 
     for (int i = minimum; i < maximum; i++) {
-      totalDuration += getTimeBetweenTwoStations(i, i + 1);
+      totalDuration += getTimeBetweenTwoStations(from: i, to: i + 1);
     }
 
     return totalDuration;
   }
 }
 
-DateTime getStartTime(int stationIndex) {
+DateTime getStartTime({int station}) {
   DateTime now = DateTime.now();
-  if (stationIndex == 0) {
+  if (station == 0) {
     return DateTime(now.year, now.month, now.day, 6, 30, 0, 0, 0);
-  } else if (stationIndex == 8) {
+  } else if (station == 8) {
     return DateTime(now.year, now.month, now.day, 6, 21, 0, 0, 0);
   } else {
     throw Exception("Invalid station id.");
@@ -135,15 +135,15 @@ List<LaunchTimeDiff> rbDiff = [
   LaunchTimeDiff(Duration(minutes: 18, seconds: 0)),
 ];
 
-List<DateTime> getLaunchTimes(int stationIndex) {
-  DateTime time = getStartTime(stationIndex);
+List<DateTime> getLaunchTimes({int station}) {
+  DateTime time = getStartTime(station: station);
   List<DateTime> result = [time];
 
   List<LaunchTimeDiff> diffs;
   //Total: 96
-  if (stationIndex == 0) {
+  if (station == 0) {
     diffs = moscowDiff;
-  } else if (stationIndex == 8) {
+  } else if (station == 8) {
     diffs = rbDiff;
   } else {
     throw Exception('Invalid station id.');
@@ -159,14 +159,14 @@ List<DateTime> getLaunchTimes(int stationIndex) {
   return result;
 }
 
-List<DateTime> getArrivalTimes(int stationIndex, int directionIndex) {
-  int startIndex = directionIndex == 0 ? 8 : 0;
-  List<DateTime> launchTimes = getLaunchTimes(startIndex);
-  Duration distanceDuration = getTimeBetweenTwoStations(startIndex, stationIndex);
-  if (directionIndex == 1) {
+List<DateTime> getArrivalTimes({int station, int direction}) {
+  int startIndex = direction == 0 ? 8 : 0;
+  List<DateTime> launchTimes = getLaunchTimes(station: startIndex);
+  Duration distanceDuration = getTimeBetweenTwoStations(from: startIndex, to: station);
+  if (direction == 1) {
     return launchTimes.map((time) => time.add(distanceDuration)).toList();
   } else {
-    if (stationIndex < 4) {
+    if (station < 4) {
       DateTime now = DateTime.now();
       launchTimes.insert(0, DateTime(now.year, now.month, now.day, 6, 25, 10).subtract(distanceDuration));
       return launchTimes.map((time) => time.add(distanceDuration)).toList();
@@ -174,4 +174,26 @@ List<DateTime> getArrivalTimes(int stationIndex, int directionIndex) {
       return launchTimes.map((time) => time.add(distanceDuration)).toList();
     }
   }
+}
+
+List<DateTime> getArrivalTimesBetweenStations({int from, int to}) {
+  return getArrivalTimes(station: from, direction: getDirection(from: from, to: to));
+}
+
+int getDirection({int from, int to}) {
+  if (to > from) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+DateTime getClosestArrivalTimeInList({List<DateTime> arrivalTimes}) {
+  DateTime now = DateTime.now();
+  for (var time in arrivalTimes) {
+    if (now.isBefore(time)) {
+      return time;
+    }
+  }
+  return null;
 }

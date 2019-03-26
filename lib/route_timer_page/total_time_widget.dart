@@ -9,7 +9,7 @@ class TotalTimeWidget extends StatelessWidget {
   const TotalTimeWidget({Key key, this.departureStationIndex, this.arrivalStationIndex}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Duration travelTime = getTimeBetweenTwoStations(departureStationIndex, arrivalStationIndex);
+    Duration travelTime = getTimeBetweenTwoStations(from: departureStationIndex, to: arrivalStationIndex);
 
     int minutes = travelTime.inMinutes;
     int seconds = travelTime.inSeconds - travelTime.inMinutes * 60;

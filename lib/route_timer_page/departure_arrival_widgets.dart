@@ -49,7 +49,8 @@ class ArrivalTimeWidget extends StatelessWidget {
       : super(key: key);
 
   Widget _buildTime() {
-    DateTime arrivalTime = departureTime.add(getTimeBetweenTwoStations(arrivalStationIndex, departureStationIndex));
+    DateTime arrivalTime =
+        departureTime.add(getTimeBetweenTwoStations(from: arrivalStationIndex, to: departureStationIndex));
     Color color = Colors.black;
     return (arrivalStationIndex == departureStationIndex)
         ? Text(
