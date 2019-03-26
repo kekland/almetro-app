@@ -25,9 +25,17 @@ class _AppContentWidgetState extends State<AppContentWidget> {
     );
   }
 
+  Widget createArrivalsPage() {
+    return ArrivalsPage(
+      departureStationIndex: _departureStationIndex,
+      arrivalStationIndex: _arrivalStationIndex,
+    );
+  }
+
   @override
   void initState() {
     pageViewController = PageController(keepPage: true, initialPage: 0);
+
     pageViewController.addListener(() {
       setState(() {
         currentPageAnimationValue = pageViewController.page;
@@ -36,7 +44,7 @@ class _AppContentWidgetState extends State<AppContentWidget> {
 
     pages = [
       createRouteTimePage(),
-      ArrivalsPage(),
+      createArrivalsPage(),
     ];
 
     super.initState();
