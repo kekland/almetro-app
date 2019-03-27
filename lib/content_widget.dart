@@ -1,4 +1,5 @@
 import 'package:almaty_metro/arrivals_page/arrivals_page.dart';
+import 'package:almaty_metro/bottom_panel/bottom_panel_new.dart';
 import 'package:almaty_metro/route_timer_page/bottom_panel.dart';
 import 'package:almaty_metro/route_timer_page/route_timer_page.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,7 @@ class _AppContentWidgetState extends State<AppContentWidget> {
             children: pages,
           ),
         ),
-        Padding(
+        /*Padding(
           padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
           child: BottomPanel(
             onChange: (int departureStationIndex, int arrivalStationIndex) {
@@ -71,7 +72,11 @@ class _AppContentWidgetState extends State<AppContentWidget> {
               });
             },
           ),
-        ),
+        ),*/
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+          child: BottomPanelNew()
+        )
       ],
     );
   }
