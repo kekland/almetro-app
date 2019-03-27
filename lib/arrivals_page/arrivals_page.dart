@@ -17,30 +17,42 @@ class _ArrivalsPageState extends State<ArrivalsPage> {
   ScrollController scrollController;
   int nextTrainIndex;
   bool scrolled = false;
+  double offset = 0.0;
+
+  setArrivalsAndNextTrainIndex() {
+    arrivals = getArrivalTimesBetweenStations(from: widget.departureStationIndex, to: widget.arrivalStationIndex);
+    DateTime now = DateTime.now();
+    nextTrainIndex = null;
+    for (int index = 0; index < arrivals.length; index++) {
+      if (arrivals[index].isAfter(now) && nextTrainIndex == null) {
+        nextTrainIndex = index;
+        break;
+      }
+    }
+  }
 
   @override
   void didUpdateWidget(ArrivalsPage oldWidget) {
-    if (widget.departureStationIndex != oldWidget.departureStationIndex &&
-        widget.arrivalStationIndex != oldWidget.arrivalStationIndex) {
-      arrivals = getArrivalTimesBetweenStations(from: widget.departureStationIndex, to: widget.arrivalStationIndex);
-    }
+    setArrivalsAndNextTrainIndex();
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   void initState() {
-    arrivals = getArrivalTimesBetweenStations(from: widget.departureStationIndex, to: widget.arrivalStationIndex);
     scrollController = ScrollController(keepScrollOffset: true);
-    /*scrollController.addListener(() {
-      setState(() {});
-    });*/
+    setArrivalsAndNextTrainIndex();
+    scrollController.addListener(() {
+      offset =scrollController.offset;
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => scrollController.jumpTo(offset));
+    
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    nextTrainIndex = null;
     scrollTo();
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
@@ -49,9 +61,6 @@ class _ArrivalsPageState extends State<ArrivalsPage> {
         physics: BouncingScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         itemBuilder: (context, index) {
-          if(arrivals[index].isAfter(now) && nextTrainIndex == null) {
-            nextTrainIndex = index;
-          }
           return Padding(
             padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
             child: ArrivalTimeWidget(
@@ -67,7 +76,12 @@ class _ArrivalsPageState extends State<ArrivalsPage> {
   }
 
   Future scrollTo() {
-    scrollController.animateTo(nextTrainIndex * 34.0, curve: Curves.easeInOut, duration: Duration(milliseconds: 700));
+    if (scrolled) {
+      return null;
+    }
+    Future.delayed(Duration(milliseconds: 250), () {
+      scrollController.animateTo(nextTrainIndex * 62.5, curve: Curves.elasticOut, duration: Duration(milliseconds: 1500));
+    });
     return null;
   }
 }
