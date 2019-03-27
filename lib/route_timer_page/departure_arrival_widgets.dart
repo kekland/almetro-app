@@ -32,7 +32,7 @@ class DepartureTimeWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Время отьезда', style: TextStyle(fontSize: 16.0, color: Colors.black45)),
+          Text('Время отьезда', style: TextStyle(fontSize: 14.0, color: Colors.black45)),
           _buildTime(),
         ],
       ),
@@ -71,7 +71,7 @@ class ArrivalTimeWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Время прибытия', style: TextStyle(fontSize: 16.0, color: Colors.black45)),
+          Text('Время прибытия', style: TextStyle(fontSize: 14.0, color: Colors.black45)),
           _buildTime(),
         ],
       ),

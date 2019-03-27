@@ -72,13 +72,12 @@ class _StationSelectorWidgetState extends State<StationSelectorWidget> with Sing
   @override
   Widget build(BuildContext context) {
     return SwipeDetector(
-      onSwipeRight: (widget.onLeftPress != null)? _clickLeft : null,
-      onSwipeLeft: (widget.onRightPress != null)? _clickRight : null,
+      onSwipeRight: (widget.onLeftPress != null) ? _clickLeft : null,
+      onSwipeLeft: (widget.onRightPress != null) ? _clickRight : null,
       swipeConfiguration: SwipeConfiguration(
-        horizontalSwipeMaxHeightThreshold: 100.0,
-        horizontalSwipeMinDisplacement: 10.0,
-        horizontalSwipeMinVelocity: 100.0
-      ),
+          horizontalSwipeMaxHeightThreshold: 100.0,
+          horizontalSwipeMinDisplacement: 10.0,
+          horizontalSwipeMinVelocity: 100.0),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
@@ -90,7 +89,7 @@ class _StationSelectorWidgetState extends State<StationSelectorWidget> with Sing
           children: [
             IconButton(
               icon: Icon(Icons.chevron_left, size: 32.0),
-              onPressed: (widget.onLeftPress != null)? _clickLeft : null,
+              onPressed: (widget.onLeftPress != null) ? _clickLeft : null,
               disabledColor: Colors.black.withOpacity(0.12),
               color: Colors.red,
             ),
@@ -100,7 +99,7 @@ class _StationSelectorWidgetState extends State<StationSelectorWidget> with Sing
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(widget.subtitle),
+                  Text(widget.subtitle, style: TextStyle(fontSize: 14.0, color: Colors.black45)),
                   Stack(
                     children: [
                       Opacity(
@@ -109,7 +108,8 @@ class _StationSelectorWidgetState extends State<StationSelectorWidget> with Sing
                           (_oldTitle != null) ? _oldTitle : widget.title,
                           style: TextStyle(
                             fontSize: 28.0,
-                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Futura',
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
@@ -125,7 +125,8 @@ class _StationSelectorWidgetState extends State<StationSelectorWidget> with Sing
                             (_newTitle != null) ? _newTitle : "",
                             style: TextStyle(
                               fontSize: 28.0,
-                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Futura',
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
@@ -138,7 +139,7 @@ class _StationSelectorWidgetState extends State<StationSelectorWidget> with Sing
             SizedBox(width: 16.0),
             IconButton(
               icon: Icon(Icons.chevron_right, size: 32.0),
-              onPressed: (widget.onRightPress != null)? _clickRight : null,
+              onPressed: (widget.onRightPress != null) ? _clickRight : null,
               disabledColor: Colors.black.withOpacity(0.12),
               color: Colors.red,
             ),

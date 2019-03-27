@@ -2,6 +2,9 @@ import 'package:almaty_metro/info_page/info_page.dart';
 import 'package:flutter/material.dart';
 
 class MetroBar extends StatelessWidget {
+  final String title;
+
+  const MetroBar({Key key, this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -13,10 +16,11 @@ class MetroBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Almetro',
+              title,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 18.0,
+                fontSize: 24.0,
+                fontFamily: 'Futura',
                 fontWeight: FontWeight.w500,
               ),
             ),

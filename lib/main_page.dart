@@ -12,7 +12,9 @@ class MainPage extends StatelessWidget {
           SafeArea(
             child: Column(
               children: <Widget>[
-                MetroBar(),
+                MetroBar(
+                  title: 'Almetro',
+                ),
                 Expanded(
                   child: AppContentWidget()
                 ),

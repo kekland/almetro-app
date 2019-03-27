@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Almetro',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.red
       ),
       home: MainPage(),
     );

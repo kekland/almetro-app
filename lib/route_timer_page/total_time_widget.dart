@@ -21,7 +21,7 @@ class TotalTimeWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Время в пути', style: TextStyle(fontSize: 16.0, color: Colors.black45)),
+          Text('Время в пути', style: TextStyle(fontSize: 14.0, color: Colors.black45)),
           Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -35,9 +35,9 @@ class TotalTimeWidget extends StatelessWidget {
                   ]
                 : [
                     Text('${minutes}', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28.0, color: color)),
-                    Text('мин. ', style: TextStyle(fontSize: 18.0, color: Colors.black45)),
+                    Text('мин. ', style: TextStyle(fontSize: 18.0, color: Colors.black45, fontFamily: "Futura")),
                     Text('${seconds}', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28.0, color: color)),
-                    Text('сек.', style: TextStyle(fontSize: 18.0, color: Colors.black45)),
+                    Text('сек.', style: TextStyle(fontSize: 18.0, color: Colors.black45, fontFamily: "Futura")),
                   ],
           ),
         ],

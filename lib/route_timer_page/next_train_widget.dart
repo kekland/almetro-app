@@ -18,7 +18,7 @@ class NextTrainWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Следующий поезд через', style: TextStyle(fontSize: 16.0, color: Colors.black45)),
+          Text('Следующий поезд через', style: TextStyle(fontSize: 14.0, color: Colors.black45)),
           Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -33,10 +33,10 @@ class NextTrainWidget extends StatelessWidget {
                 : [
                     Text('${timeUntilNextTrain.minute}',
                         style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28.0, color: color)),
-                    Text('мин. ', style: TextStyle(fontSize: 18.0, color: Colors.black45)),
+                    Text('мин. ', style: TextStyle(fontSize: 18.0, color: Colors.black45, fontFamily: 'Futura')),
                     Text('${timeUntilNextTrain.second}',
                         style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28.0, color: color)),
-                    Text('сек.', style: TextStyle(fontSize: 18.0, color: Colors.black45)),
+                    Text('сек.', style: TextStyle(fontSize: 18.0, color: Colors.black45, fontFamily: 'Futura')),
                   ],
           ),
         ],

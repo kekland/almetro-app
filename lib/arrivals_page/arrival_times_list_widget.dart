@@ -19,6 +19,7 @@ class ArrivalTimeWidget extends StatelessWidget {
     TextStyle style = TextStyle(
       color: (nextTrain)? Colors.black87 : Colors.black38,
       fontWeight: (nextTrain)? FontWeight.w500 : FontWeight.w400,
+      fontFamily: "Futura",
     );
 
     String text =

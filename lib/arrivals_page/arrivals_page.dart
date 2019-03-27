@@ -31,6 +31,11 @@ class _ArrivalsPageState extends State<ArrivalsPage> {
     }
   }
 
+  void redraw() {
+    setState(() {});
+    Future.delayed(Duration(seconds: 1), redraw);
+  }
+
   @override
   void didUpdateWidget(ArrivalsPage oldWidget) {
     setArrivalsAndNextTrainIndex();
@@ -46,14 +51,14 @@ class _ArrivalsPageState extends State<ArrivalsPage> {
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => scrollController.jumpTo(offset));
-    
+    redraw();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    scrollTo();
+    //scrollTo();
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: ListView.builder(
@@ -81,6 +86,7 @@ class _ArrivalsPageState extends State<ArrivalsPage> {
     }
     Future.delayed(Duration(milliseconds: 250), () {
       scrollController.animateTo(nextTrainIndex * 62.5, curve: Curves.elasticOut, duration: Duration(milliseconds: 1500));
+      scrolled = true;
     });
     return null;
   }
