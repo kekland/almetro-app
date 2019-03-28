@@ -1,55 +1,46 @@
+import 'package:almaty_metro/bottom_panel/station_selector_circle.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:almaty_metro/stations.dart' as data;
 
-class StationCircle extends StatelessWidget {
-  final bool activated;
-
-  const StationCircle({Key key, this.activated = false}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 16.0,
-      height: 16.0,
-      decoration: BoxDecoration(
-        color: (activated) ? Colors.red : Colors.black.withOpacity(0.12),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-    );
-  }
-}
-
 class StationSelectorNew extends StatefulWidget {
+  final Function(int index) onStationChange;
+  final int stationsCount;
+  final int defaultStation;
+
+  const StationSelectorNew({Key key, this.onStationChange, this.stationsCount, this.defaultStation}) : super(key: key);
+
   @override
   _StationSelectorNewState createState() => _StationSelectorNewState();
 }
 
 class _StationSelectorNewState extends State<StationSelectorNew> {
-  int selectedStation = 0;
-  int stations = 8;
-  List<GlobalKey> stationWidgets = [];
+  int _selectedStation = 0;
+  List<GlobalKey> _stationWidgets = [];
 
   @override
   initState() {
     super.initState();
-    stationWidgets = [];
-    for (int i = 0; i < stations; i++) {
+    _stationWidgets = [];
+    for (int i = 0; i < widget.stationsCount; i++) {
       GlobalKey key = GlobalKey();
-      stationWidgets.add(key);
+      _stationWidgets.add(key);
     }
+    
+    _selectedStation = widget.defaultStation;
   }
 
   List<Widget> _buildRowChildren() {
     List<Widget> children = [];
 
-    for (int i = 0; i < stations; i++) {
+    for (int i = 0; i < widget.stationsCount; i++) {
       children.add(
         Expanded(
-          key: stationWidgets[i],
+          key: _stationWidgets[i],
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: Center(
-              child: StationCircle(activated: i == selectedStation),
+              child: StationCircle(activated: i == _selectedStation),
             ),
           ),
         ),
@@ -59,15 +50,16 @@ class _StationSelectorNewState extends State<StationSelectorNew> {
   }
 
   _setSelectedStation(Offset point) {
-    for (int i = 0; i < stations; i++) {
-      var widgetKey = stationWidgets[i];
+    for (int i = 0; i < widget.stationsCount; i++) {
+      var widgetKey = _stationWidgets[i];
       RenderBox renderBox = widgetKey.currentContext.findRenderObject();
       var position = renderBox.localToGlobal(Offset.zero);
       var size = renderBox.size;
 
       if (point.dx >= position.dx && point.dx <= position.dx + size.width) {
         setState(() {
-          selectedStation = i;
+          _selectedStation = i;
+          widget.onStationChange(_selectedStation);
         });
         break;
       }
