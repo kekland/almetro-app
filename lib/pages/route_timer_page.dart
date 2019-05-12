@@ -1,9 +1,8 @@
-import 'package:almaty_metro/route_timer_page/bottom_panel.dart';
-import 'package:almaty_metro/route_timer_page/departure_arrival_widgets.dart';
-import 'package:almaty_metro/route_timer_page/next_train_widget.dart';
-import 'package:almaty_metro/route_timer_page/total_time_widget.dart';
-import 'package:almaty_metro/time.dart';
-import 'package:almaty_metro/time_calculator.dart';
+import 'package:almaty_metro/api/time.dart';
+import 'package:almaty_metro/api/time_calculator.dart';
+import 'package:almaty_metro/widgets/route_timer_page/departure_arrival_widgets.dart';
+import 'package:almaty_metro/widgets/route_timer_page/next_train_widget.dart';
+import 'package:almaty_metro/widgets/route_timer_page/total_time_widget.dart';
 import 'package:flutter/material.dart';
 
 class RouteTimerPage extends StatefulWidget {
@@ -31,8 +30,8 @@ class _RouteTimerPageState extends State<RouteTimerPage> {
       _arrivalStationIndex = widget.arrivalStationIndex;
     }
 
-    _arrivalTimes = getArrivalTimesBetweenStations(from: _departureStationIndex, to: _arrivalStationIndex);
-    _departureTime = getClosestArrivalTimeInList(arrivalTimes: _arrivalTimes);
+    _arrivalTimes = MetroMath.getArrivalTimesBetweenStations(from: _departureStationIndex, to: _arrivalStationIndex);
+    _departureTime = MetroMath.getClosestArrivalTimeInList(arrivalTimes: _arrivalTimes);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -43,12 +42,12 @@ class _RouteTimerPageState extends State<RouteTimerPage> {
     _departureStationIndex = widget.departureStationIndex ?? 0;
     _arrivalStationIndex = widget.arrivalStationIndex ?? 8;
 
-    _arrivalTimes = getArrivalTimesBetweenStations(from: _departureStationIndex, to: _arrivalStationIndex);
-    _departureTime = getClosestArrivalTimeInList(arrivalTimes: _arrivalTimes);
+    _arrivalTimes = MetroMath.getArrivalTimesBetweenStations(from: _departureStationIndex, to: _arrivalStationIndex);
+    _departureTime = MetroMath.getClosestArrivalTimeInList(arrivalTimes: _arrivalTimes);
   }
 
   Time _getTimeUntilNextTrain() {
-    DateTime closest = getClosestArrivalTimeInList(arrivalTimes: _arrivalTimes);
+    DateTime closest = MetroMath.getClosestArrivalTimeInList(arrivalTimes: _arrivalTimes);
     if (closest == null) {
       throw "Метро не работает.";
     }

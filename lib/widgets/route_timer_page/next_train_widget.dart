@@ -1,5 +1,5 @@
-import 'package:almaty_metro/icon_content_widget.dart';
-import 'package:almaty_metro/time.dart';
+import 'package:almaty_metro/api/time.dart';
+import 'package:almaty_metro/widgets/shared/icon_content_widget.dart';
 import 'package:flutter/material.dart';
 
 class NextTrainWidget extends StatelessWidget {

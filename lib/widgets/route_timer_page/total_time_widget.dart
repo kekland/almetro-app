@@ -1,5 +1,5 @@
-import 'package:almaty_metro/icon_content_widget.dart';
-import 'package:almaty_metro/time_calculator.dart';
+import 'package:almaty_metro/api/time_calculator.dart';
+import 'package:almaty_metro/widgets/shared/icon_content_widget.dart';
 import 'package:flutter/material.dart';
 
 class TotalTimeWidget extends StatelessWidget {
@@ -9,7 +9,7 @@ class TotalTimeWidget extends StatelessWidget {
   const TotalTimeWidget({Key key, this.departureStationIndex, this.arrivalStationIndex}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Duration travelTime = getTimeBetweenTwoStations(from: departureStationIndex, to: arrivalStationIndex);
+    Duration travelTime = MetroMath.getTimeBetweenTwoStations(from: departureStationIndex, to: arrivalStationIndex);
 
     int minutes = travelTime.inMinutes;
     int seconds = travelTime.inSeconds - travelTime.inMinutes * 60;

@@ -1,5 +1,5 @@
 import 'package:almaty_metro/design/almetro_design.dart';
-import 'package:almaty_metro/info_page/info_page.dart';
+import 'package:almaty_metro/pages/info_page.dart';
 import 'package:flutter/material.dart';
 
 class MetroBar extends StatelessWidget {

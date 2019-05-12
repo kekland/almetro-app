@@ -1,5 +1,5 @@
+import 'package:almaty_metro/api/stations.dart';
 import 'package:almaty_metro/design/almetro_design.dart';
-import 'package:almaty_metro/stations.dart';
 import 'package:flutter/material.dart';
 
 class BottomPanelNew extends StatefulWidget {
@@ -9,7 +9,7 @@ class BottomPanelNew extends StatefulWidget {
 
 class _BottomPanelNewState extends State<BottomPanelNew> {
   int _departureStationIndex = 0;
-  int _arrivalStationIndex = stations.length - 1;
+  int _arrivalStationIndex = MetroData.stations.length - 1;
   @override
   Widget build(BuildContext context) {
     return CardWidget(

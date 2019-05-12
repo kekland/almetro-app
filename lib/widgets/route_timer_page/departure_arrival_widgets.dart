@@ -1,6 +1,6 @@
-import 'package:almaty_metro/icon_content_widget.dart';
-import 'package:almaty_metro/time.dart';
-import 'package:almaty_metro/time_calculator.dart';
+import 'package:almaty_metro/api/time.dart';
+import 'package:almaty_metro/api/time_calculator.dart';
+import 'package:almaty_metro/widgets/shared/icon_content_widget.dart';
 import 'package:flutter/material.dart';
 
 class DepartureTimeWidget extends StatelessWidget {
@@ -19,7 +19,7 @@ class DepartureTimeWidget extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28.0, color: color),
           )
         : Text(
-            '${dateTimeToHourOfDayString(departureTime)}',
+            '${Time.dateTimeToHourOfDayString(departureTime)}',
             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28.0, color: color),
           );
   }
@@ -50,7 +50,7 @@ class ArrivalTimeWidget extends StatelessWidget {
 
   Widget _buildTime() {
     DateTime arrivalTime =
-        departureTime.add(getTimeBetweenTwoStations(from: arrivalStationIndex, to: departureStationIndex));
+        departureTime.add(MetroMath.getTimeBetweenTwoStations(from: arrivalStationIndex, to: departureStationIndex));
     Color color = Colors.black;
     return (arrivalStationIndex == departureStationIndex)
         ? Text(
@@ -58,7 +58,7 @@ class ArrivalTimeWidget extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28.0, color: color),
           )
         : Text(
-            '${dateTimeToHourOfDayString(arrivalTime)}',
+            '${Time.dateTimeToHourOfDayString(arrivalTime)}',
             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28.0, color: color),
           );
   }

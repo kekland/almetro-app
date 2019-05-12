@@ -1,9 +1,7 @@
-import 'package:almaty_metro/arrivals_page/arrivals_page.dart';
-import 'package:almaty_metro/route_timer_page/bottom_panel.dart';
-import 'package:almaty_metro/route_timer_page/route_timer_page.dart';
-import 'package:almaty_metro/widgets/main_page/bottom_panel_new.dart';
+import 'package:almaty_metro/pages/route_timer_page.dart';
+import 'package:almaty_metro/widgets/content_page/bottom_panel_new.dart';
 import 'package:flutter/material.dart';
-
+/*
 class AppContentPage extends StatefulWidget {
   @override
   _AppContentPageState createState() => _AppContentPageState();
@@ -60,6 +58,35 @@ class _AppContentPageState extends State<AppContentPage> {
             controller: pageViewController,
             physics: BouncingScrollPhysics(),
             children: pages,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+          child: BottomPanelNew(),
+        ),
+      ],
+    );
+  }
+}
+*/
+
+class AppContentPage extends StatefulWidget {
+  @override
+  _AppContentPageState createState() => _AppContentPageState();
+}
+
+class _AppContentPageState extends State<AppContentPage> {
+  int _arrivalStationIndex = 8;
+  int _departureStationIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: RouteTimerPage(
+            arrivalStationIndex: _arrivalStationIndex,
+            departureStationIndex: _departureStationIndex,
           ),
         ),
         Padding(

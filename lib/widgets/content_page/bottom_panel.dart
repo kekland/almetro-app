@@ -1,7 +1,7 @@
+import 'package:almaty_metro/api/stations.dart';
 import 'package:almaty_metro/design/widgets/card_widget.dart';
-import 'package:almaty_metro/route_timer_page/station_selector_widget.dart';
+import 'package:almaty_metro/widgets/content_page/station_selector_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:almaty_metro/stations.dart';
 
 class BottomPanel extends StatefulWidget {
   final Function(int departureStationIndex, int arrivalStationIndex) onChange;
@@ -52,12 +52,12 @@ class _BottomPanelState extends State<BottomPanel> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           StationSelectorWidget(
-            title: stations[_departureStationIndex],
+            title: MetroData.stations[_departureStationIndex],
             subtitle: 'Со станции',
             icon: Icons.subway,
             isTop: true,
             onLeftPress: _departureStationIndex > 0 ? _onDepartureStationLeftPress : null,
-            onRightPress: _departureStationIndex < stations.length - 1 ? _onDepartureStationRightPress : null,
+            onRightPress: _departureStationIndex < MetroData.stations.length - 1 ? _onDepartureStationRightPress : null,
           ),
           Container(
             width: double.infinity,
@@ -65,12 +65,12 @@ class _BottomPanelState extends State<BottomPanel> {
             color: Colors.black.withOpacity(0.05),
           ),
           StationSelectorWidget(
-            title: stations[_arrivalStationIndex],
+            title: MetroData.stations[_arrivalStationIndex],
             subtitle: 'На станцию',
             icon: Icons.directions,
             isTop: false,
             onLeftPress: _arrivalStationIndex > 0 ? _onArrivalStationLeftPress : null,
-            onRightPress: _arrivalStationIndex < stations.length - 1 ? _onArrivalStationRightPress : null,
+            onRightPress: _arrivalStationIndex < MetroData.stations.length - 1 ? _onArrivalStationRightPress : null,
           ),
         ],
       ),

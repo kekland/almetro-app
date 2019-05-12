@@ -1,0 +1,77 @@
+class LaunchTimeDiff {
+  int count;
+  Duration timeBetween;
+
+  LaunchTimeDiff(this.timeBetween, [this.count = 1]);
+}
+
+class LaunchTimes {
+  static List<LaunchTimeDiff> moscowDiff = [
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30), 2),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 0)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 40)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 50)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30), 2),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 0)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 40)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 50)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30), 2),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 0)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 40)),
+    LaunchTimeDiff(Duration(minutes: 7, seconds: 20)),
+    LaunchTimeDiff(Duration(minutes: 10, seconds: 0), 2),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 12, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 12, seconds: 0)),
+    LaunchTimeDiff(Duration(minutes: 13, seconds: 0), 33),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 35), 6),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 5)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 35), 6),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 5)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 35), 5),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 5)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 35)),
+    LaunchTimeDiff(Duration(minutes: 13, seconds: 15)),
+    LaunchTimeDiff(Duration(minutes: 13, seconds: 0), 15),
+    LaunchTimeDiff(Duration(minutes: 18, seconds: 0)),
+  ];
+
+  static List<LaunchTimeDiff> rayimbekBatyraDiff = [
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 0)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 40)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 50)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30), 2),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 0)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 40)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 50)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30), 2),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 0)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 40)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 50)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 10, seconds: 0)),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 12, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 10, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 13, seconds: 0)),
+    LaunchTimeDiff(Duration(minutes: 13, seconds: 30)),
+    LaunchTimeDiff(Duration(minutes: 13, seconds: 0), 31),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 35), 6),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 5)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 35), 6),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 5)),
+    LaunchTimeDiff(Duration(minutes: 8, seconds: 35), 6),
+    LaunchTimeDiff(Duration(minutes: 9, seconds: 5)),
+    LaunchTimeDiff(Duration(minutes: 13, seconds: 15)),
+    LaunchTimeDiff(Duration(minutes: 13, seconds: 0), 17),
+    LaunchTimeDiff(Duration(minutes: 18, seconds: 0)),
+  ];
+}
