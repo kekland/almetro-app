@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_range_slider/flutter_range_slider.dart';
 
+import '../icon_content_widget.dart';
+
 //TODO: Rename when finished
 class BottomPanelNew extends StatefulWidget {
   @override
@@ -18,43 +20,26 @@ class _BottomPanelNewState extends State<BottomPanelNew> {
   Widget build(BuildContext context) {
     return CardWidget(
       fluid: true,
-      padding: EdgeInsets.zero,
+      padding: const EdgeInsets.all(16.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: <Widget>[
-              Text(
-                stations[_departureStationIndex],
-                style: TextStyle(
-                  fontSize: 28.0,
-                  fontFamily: 'Futura',
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Icon(
-                FontAwesomeIcons.arrowRight,
-                color: Colors.black12,
-                size: 20.0,
-              ),
-              Text(
-                stations[_arrivalStationIndex],
-                style: TextStyle(
-                  fontSize: 28.0,
-                  fontFamily: 'Futura',
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
+          Text(
+            'Откуда',
+            style: TextStyle(fontSize: 14.0, color: Colors.black45),
           ),
-          SizedBox(height: 8.0),
-          RangeSlider(
-            lowerValue: 0.0,
-            upperValue: stations.length.toDouble(),
-            divisions: stations.length,
-            min: 0.0,
-            max: stations.length.toDouble(),
-            showValueIndicator: true,
-            onChanged: (double lower, double upper) {},
+          Text(
+            'Москва',
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28.0, color: Colors.black),
+          ),
+          SizedBox(height: 16.0),
+          Text(
+            'Куда',
+            style: TextStyle(fontSize: 14.0, color: Colors.black45),
+          ),
+          Text(
+            'Райымбек батыра',
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28.0, color: Colors.black),
           ),
         ],
       ),

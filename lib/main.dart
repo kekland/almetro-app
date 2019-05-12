@@ -14,7 +14,7 @@ void _setTargetPlatformForDesktop() {
   TargetPlatform targetPlatform;
   if (Platform.isLinux || Platform.isWindows || Platform.isFuchsia) {
     targetPlatform = TargetPlatform.fuchsia;
-  }
+  } 
   if (targetPlatform != null) {
     debugDefaultTargetPlatformOverride = targetPlatform;
   }
