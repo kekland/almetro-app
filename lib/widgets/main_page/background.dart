@@ -59,12 +59,12 @@ class _MainPageBackgroundState extends State<MainPageBackground> {
   void initState() {
     super.initState();
 
-    changeColors();
+   // changeColors();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
+    /*return AnimatedContainer(
       duration: Duration(milliseconds: 1000),
       width: double.infinity,
       height: double.infinity,
@@ -74,6 +74,14 @@ class _MainPageBackgroundState extends State<MainPageBackground> {
           begin: AlignmentDirectional.topStart,
           end: AlignmentDirectional.bottomEnd,
         ),
+      ),
+    );*/
+
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.red.shade500,
       ),
     );
   }

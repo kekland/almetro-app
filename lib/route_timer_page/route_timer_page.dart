@@ -1,4 +1,3 @@
-import 'package:almaty_metro/main_page_background.dart';
 import 'package:almaty_metro/route_timer_page/bottom_panel.dart';
 import 'package:almaty_metro/route_timer_page/departure_arrival_widgets.dart';
 import 'package:almaty_metro/route_timer_page/next_train_widget.dart';
