@@ -22,6 +22,7 @@ class _StationSelectorNewState extends State<StationSelectorNew> {
   initState() {
     super.initState();
     _stationWidgets = [];
+
     for (int i = 0; i < widget.stationsCount; i++) {
       GlobalKey key = GlobalKey();
       _stationWidgets.add(key);
