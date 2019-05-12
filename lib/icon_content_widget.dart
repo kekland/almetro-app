@@ -1,4 +1,4 @@
-import 'package:almaty_metro/card_widget.dart';
+import 'package:almaty_metro/design/widgets/card_widget.dart';
 import 'package:flutter/material.dart';
 
 class IconContentWidget extends StatelessWidget {

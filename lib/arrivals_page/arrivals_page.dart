@@ -1,5 +1,4 @@
 import 'package:almaty_metro/arrivals_page/arrival_times_list_widget.dart';
-import 'package:almaty_metro/card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:almaty_metro/time_calculator.dart';
 

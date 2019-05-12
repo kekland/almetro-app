@@ -1,15 +1,15 @@
 import 'package:almaty_metro/arrivals_page/arrivals_page.dart';
-import 'package:almaty_metro/bottom_panel/bottom_panel_new.dart';
 import 'package:almaty_metro/route_timer_page/bottom_panel.dart';
 import 'package:almaty_metro/route_timer_page/route_timer_page.dart';
+import 'package:almaty_metro/widgets/main_page/bottom_panel_new.dart';
 import 'package:flutter/material.dart';
 
-class AppContentWidget extends StatefulWidget {
+class AppContentPage extends StatefulWidget {
   @override
-  _AppContentWidgetState createState() => _AppContentWidgetState();
+  _AppContentPageState createState() => _AppContentPageState();
 }
 
-class _AppContentWidgetState extends State<AppContentWidget> {
+class _AppContentPageState extends State<AppContentPage> {
   PageController pageViewController;
   int initialPage = 0;
   double currentPageAnimationValue = 0;
@@ -19,14 +19,14 @@ class _AppContentWidgetState extends State<AppContentWidget> {
 
   List<Widget> pages;
 
-  Widget createRouteTimePage() {
+  Widget _createRouteTimePage() {
     return RouteTimerPage(
       departureStationIndex: _departureStationIndex,
       arrivalStationIndex: _arrivalStationIndex,
     );
   }
 
-  Widget createArrivalsPage() {
+  Widget _createArrivalsPage() {
     return ArrivalsPage(
       departureStationIndex: _departureStationIndex,
       arrivalStationIndex: _arrivalStationIndex,
@@ -44,8 +44,8 @@ class _AppContentWidgetState extends State<AppContentWidget> {
     });
 
     pages = [
-      createRouteTimePage(),
-      createArrivalsPage(),
+      _createRouteTimePage(),
+      _createArrivalsPage(),
     ];
 
     super.initState();

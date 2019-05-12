@@ -5,22 +5,6 @@ class CardWidget extends StatefulWidget {
   final EdgeInsets padding;
   final VoidCallback onClick;
   final bool fluid;
-  /*
-      duration: Duration(milliseconds: 750),
-      curve: Curves.easeInOut,
-      padding: padding,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.0),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.25),
-            blurRadius: 12.0,
-            offset: Offset(0.0, 6.0),
-            spreadRadius: 0.0,
-          ),
-        ],
-      ),*/
 
   const CardWidget({Key key, this.child, this.padding, this.onClick, this.fluid}) : super(key: key);
 

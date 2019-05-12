@@ -1,5 +1,5 @@
 import 'package:almaty_metro/widgets/main_page/app_bar.dart';
-import 'package:almaty_metro/content_widget.dart';
+import 'package:almaty_metro/pages/content_page.dart';
 import 'package:almaty_metro/widgets/main_page/background.dart';
 import 'package:flutter/material.dart';
 class MainPage extends StatelessWidget {
@@ -16,7 +16,7 @@ class MainPage extends StatelessWidget {
                   title: 'Almetro',
                 ),
                 Expanded(
-                  child: AppContentWidget()
+                  child: AppContentPage()
                 ),
               ],
             ),

@@ -1,4 +1,4 @@
-import 'package:almaty_metro/card_widget.dart';
+import 'package:almaty_metro/design/widgets/card_widget.dart';
 import 'package:almaty_metro/route_timer_page/station_selector_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:almaty_metro/stations.dart';
