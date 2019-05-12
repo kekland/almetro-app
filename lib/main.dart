@@ -1,8 +1,24 @@
+import 'dart:io';
+
 import 'package:almaty_metro/main_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  _setTargetPlatformForDesktop();
+  runApp(MyApp());
+}
+
+void _setTargetPlatformForDesktop() {
+  TargetPlatform targetPlatform;
+  if (Platform.isLinux || Platform.isWindows || Platform.isFuchsia) {
+    targetPlatform = TargetPlatform.fuchsia;
+  }
+  if (targetPlatform != null) {
+    debugDefaultTargetPlatformOverride = targetPlatform;
+  }
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -16,9 +32,7 @@ class MyApp extends StatelessWidget {
     );
     return MaterialApp(
       title: 'Almetro',
-      theme: ThemeData(
-        primarySwatch: Colors.red
-      ),
+      theme: ThemeData(primarySwatch: Colors.red),
       home: MainPage(),
     );
   }

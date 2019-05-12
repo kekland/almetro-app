@@ -62,21 +62,10 @@ class _AppContentWidgetState extends State<AppContentWidget> {
             children: pages,
           ),
         ),
-        /*Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-          child: BottomPanel(
-            onChange: (int departureStationIndex, int arrivalStationIndex) {
-              setState(() {
-                this._departureStationIndex = departureStationIndex;
-                this._arrivalStationIndex = arrivalStationIndex;
-              });
-            },
-          ),
-        ),*/
         Padding(
           padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-          child: BottomPanelNew()
-        )
+          child: BottomPanelNew(),
+        ),
       ],
     );
   }
