@@ -14,4 +14,9 @@ class Time {
     String s = time.second.toString().padLeft(2, '0');
     return '$h:$m:$s';
   }
+
+  Time.fromDuration(Duration duration) {
+    minute = duration.inMinutes;
+    second = duration.inSeconds - duration.inMinutes * 60;
+  }
 }

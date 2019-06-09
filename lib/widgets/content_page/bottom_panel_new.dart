@@ -65,7 +65,7 @@ class _BottomPanelNewState extends State<BottomPanelNew> {
         onTap: (isPressActive) ? () => _onPress(context) : null,
         borderRadius: BorderRadius.circular(16.0),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
           child: Row(
             children: <Widget>[
               InkWell(

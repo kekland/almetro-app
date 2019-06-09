@@ -124,4 +124,10 @@ class MetroMath {
     }
     return null;
   }
+  
+  static int getClosestArrivalTimeIndexInList({List<DateTime> arrivalTimes}) {
+    DateTime closest = getClosestArrivalTimeInList(arrivalTimes: arrivalTimes);
+    if(closest == null) return null;
+    return arrivalTimes.indexOf(closest);
+  }
 }

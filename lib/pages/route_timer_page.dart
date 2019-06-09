@@ -53,20 +53,23 @@ class _RouteTimerPageState extends State<RouteTimerPage> {
     }
   }
 
-  Time _getTimeUntilNextTrain({List<DateTime> arrivalTimes}) {
-    DateTime closest = MetroMath.getClosestArrivalTimeInList(arrivalTimes: arrivalTimes);
-    if (closest == null) {
-      throw "Метро не работает.";
+  List<Time> _getNextTrains({List<DateTime> arrivalTimes}) {
+    int closestIndex = MetroMath.getClosestArrivalTimeIndexInList(arrivalTimes: arrivalTimes);
+    if (closestIndex == null) {
+      return [null, null, null];
     }
+    
+    List<Time> times = [];
     DateTime now = DateTime.now();
-    Duration difference = closest.difference(now);
 
-    if(difference == null) return null;
-
-    int minutes = difference.inMinutes;
-    int seconds = difference.inSeconds - difference.inMinutes * 60;
-
-    return Time(minutes, seconds);
+    for(int offset = 0; offset < 3; offset++) {
+      int index = closestIndex + offset;
+      DateTime closest = (index < arrivalTimes.length)? arrivalTimes[index] : null;
+      if(closest == null) times.add(null);
+      else times.add(Time.fromDuration(closest.difference(now)));
+    }
+    
+    return times;
   }
 
   @override
@@ -86,12 +89,14 @@ class _RouteTimerPageState extends State<RouteTimerPage> {
                 children: [
                   NextTrainWidget(
                     title: "В сторону Москвы",
-                    timeUntilNextTrain: (_stationIndex == 0)? null : _getTimeUntilNextTrain(arrivalTimes: _arrivalTimesInMoscowDirection),
+                    icon: Icons.chevron_left,
+                    nextTrains: (_stationIndex == 0)? null : _getNextTrains(arrivalTimes: _arrivalTimesInMoscowDirection),
                   ),
                   SizedBox(height: 16.0),
                   NextTrainWidget(
-                    title: "В сторону ${MetroData.stations.last}",
-                    timeUntilNextTrain: (_stationIndex == MetroData.stations.length - 1)? null : _getTimeUntilNextTrain(arrivalTimes: _arrivalTimesInRayimbekDirection),
+                    title: "В сторону Райымбек Батыра",
+                    icon: Icons.chevron_right,
+                    nextTrains: (_stationIndex == MetroData.stations.length - 1)? null : _getNextTrains(arrivalTimes: _arrivalTimesInRayimbekDirection),
                   ),
                 ],
               ),

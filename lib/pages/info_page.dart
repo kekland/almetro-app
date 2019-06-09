@@ -9,6 +9,19 @@ class InformationSheetWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Container(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Center(
+              child: Container(
+                width: 24.0,
+                height: 4.0,
+                decoration: BoxDecoration(
+                  color: Colors.black26,
+                  borderRadius: BorderRadius.circular(3.0),
+                ),
+              ),
+            ),
+          ),
           Text(
             'Информация',
             style: TextStyle(
