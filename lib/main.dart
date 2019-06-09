@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:almaty_metro/pages/main_page.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
