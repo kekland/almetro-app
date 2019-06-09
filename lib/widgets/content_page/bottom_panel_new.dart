@@ -1,5 +1,7 @@
 import 'package:almaty_metro/api/stations.dart';
 import 'package:almaty_metro/design/almetro_design.dart';
+import 'package:almaty_metro/design/transparent_route.dart';
+import 'package:almaty_metro/widgets/content_page/station_selection_dialog.dart';
 import 'package:flutter/material.dart';
 
 class BottomPanelNew extends StatefulWidget {
@@ -22,8 +24,10 @@ class _BottomPanelNewState extends State<BottomPanelNew> {
     });
   }
 
-  void _onPress() {
-    print("onpress");
+  void _onPress(BuildContext context) {
+    Navigator.of(context).push(TransparentRoute(builder: (_) {
+      return StationSelectionDialog();
+    }));
   }
 
   void _onRightPress() {
@@ -42,7 +46,7 @@ class _BottomPanelNewState extends State<BottomPanelNew> {
       fluid: true,
       padding: EdgeInsets.zero,
       child: InkWell(
-        onTap: (isPressActive) ? _onPress : null,
+        onTap: (isPressActive) ? () => _onPress(context) : null,
         borderRadius: BorderRadius.circular(16.0),
         child: Padding(
           padding: const EdgeInsets.all(16.0),

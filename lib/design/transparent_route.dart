@@ -24,7 +24,7 @@ class TransparentRoute extends PageRoute<void> {
   bool get maintainState => true;
 
   @override
-  Duration get transitionDuration => Duration(milliseconds: 300);
+  Duration get transitionDuration => Duration(milliseconds: 160);
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation,
@@ -36,7 +36,7 @@ class TransparentRoute extends PageRoute<void> {
         scopesRoute: true,
         explicitChildNodes: true,
         child: Container(
-          color: Colors.black45,
+          color: Colors.black.withOpacity(0.65),
           child: SafeArea(
             child: result,
           ),
