@@ -5,6 +5,9 @@ import 'package:almaty_metro/widgets/station_selection/station_selection_dialog.
 import 'package:flutter/material.dart';
 
 class BottomPanelNew extends StatefulWidget {
+  final Function(int) onStationIndexChange;
+
+  const BottomPanelNew({Key key, this.onStationIndexChange}) : super(key: key);
   @override
   _BottomPanelNewState createState() => _BottomPanelNewState();
 }
@@ -20,7 +23,7 @@ class _BottomPanelNewState extends State<BottomPanelNew> {
     if (_stationIndex == 0) return;
     setState(() {
       _stationIndex--;
-      isPressActive = true;
+      widget.onStationIndexChange(_stationIndex);
     });
   }
 
@@ -35,7 +38,10 @@ class _BottomPanelNewState extends State<BottomPanelNew> {
         -1;
 
     if (station != -1) {
-      setState(() => _stationIndex = station);
+      setState(() {
+        _stationIndex = station;
+        widget.onStationIndexChange(_stationIndex);
+      });
     }
   }
 
@@ -46,6 +52,7 @@ class _BottomPanelNewState extends State<BottomPanelNew> {
     if (_stationIndex == MetroData.stations.length - 1) return;
     setState(() {
       _stationIndex++;
+      widget.onStationIndexChange(_stationIndex);
     });
   }
 

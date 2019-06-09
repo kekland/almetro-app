@@ -76,8 +76,7 @@ class AppContentPage extends StatefulWidget {
 }
 
 class _AppContentPageState extends State<AppContentPage> {
-  int _arrivalStationIndex = 8;
-  int _departureStationIndex = 0;
+  int _stationIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -85,13 +84,14 @@ class _AppContentPageState extends State<AppContentPage> {
       children: <Widget>[
         Expanded(
           child: RouteTimerPage(
-            arrivalStationIndex: _arrivalStationIndex,
-            departureStationIndex: _departureStationIndex,
+            stationIndex: _stationIndex,
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-          child: BottomPanelNew(),
+          child: BottomPanelNew(
+            onStationIndexChange: (index) => setState(() => _stationIndex = index),
+          ),
         ),
       ],
     );

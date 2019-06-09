@@ -6,6 +6,10 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class StationSelectionDialog extends StatelessWidget {
+  final int selectedStation;
+
+  const StationSelectionDialog({Key key, this.selectedStation}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,6 +28,7 @@ class StationSelectionDialog extends StatelessWidget {
                 ),
             itemBuilder: (_, i) => StationWidget(
                   stationName: MetroData.stations[i],
+                  isSelected: i == selectedStation,
                   onTap: () {
                     Navigator.of(context).pop(i);
                   },

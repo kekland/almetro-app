@@ -4,9 +4,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class StationWidget extends StatelessWidget {
   final String stationName;
+  final bool isSelected;
   final VoidCallback onTap;
 
-  const StationWidget({Key key, this.stationName, this.onTap})
+  const StationWidget({Key key, this.stationName, this.onTap, this.isSelected})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

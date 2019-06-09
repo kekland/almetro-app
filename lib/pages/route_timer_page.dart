@@ -1,3 +1,4 @@
+import 'package:almaty_metro/api/stations.dart';
 import 'package:almaty_metro/api/time.dart';
 import 'package:almaty_metro/api/time_calculator.dart';
 import 'package:almaty_metro/widgets/route_timer_page/departure_arrival_widgets.dart';
@@ -6,58 +7,61 @@ import 'package:almaty_metro/widgets/route_timer_page/total_time_widget.dart';
 import 'package:flutter/material.dart';
 
 class RouteTimerPage extends StatefulWidget {
-  final int departureStationIndex;
-  final int arrivalStationIndex;
+  final int stationIndex;
 
-  const RouteTimerPage({Key key, this.departureStationIndex, this.arrivalStationIndex}) : super(key: key);
+  const RouteTimerPage({Key key, this.stationIndex}) : super(key: key);
   @override
   _RouteTimerPageState createState() => _RouteTimerPageState();
 }
 
 class _RouteTimerPageState extends State<RouteTimerPage> {
-  int _departureStationIndex;
-  int _arrivalStationIndex;
+  int _stationIndex;
 
-  List<DateTime> _arrivalTimes;
-  DateTime _departureTime;
+  List<DateTime> _arrivalTimesInMoscowDirection;
+  List<DateTime> _arrivalTimesInRayimbekDirection;
+
+  void _calculateArrivalTimes() {
+    _arrivalTimesInMoscowDirection = MetroMath.getArrivalTimes(station: _stationIndex, direction: 1);
+    _arrivalTimesInRayimbekDirection = MetroMath.getArrivalTimes(station: _stationIndex, direction: 0);
+  }
 
   @override
   void didUpdateWidget(RouteTimerPage oldWidget) {
-    if (oldWidget.departureStationIndex != widget.departureStationIndex) {
-      _departureStationIndex = widget.departureStationIndex;
+    if (oldWidget.stationIndex != widget.stationIndex) {
+      _stationIndex = widget.stationIndex;
     }
-    if (oldWidget.arrivalStationIndex != widget.arrivalStationIndex) {
-      _arrivalStationIndex = widget.arrivalStationIndex;
-    }
-
-    _arrivalTimes = MetroMath.getArrivalTimesBetweenStations(from: _departureStationIndex, to: _arrivalStationIndex);
-    _departureTime = MetroMath.getClosestArrivalTimeInList(arrivalTimes: _arrivalTimes);
+    _calculateArrivalTimes();
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   initState() {
     super.initState();
-
-    _departureStationIndex = widget.departureStationIndex ?? 0;
-    _arrivalStationIndex = widget.arrivalStationIndex ?? 8;
-
-    _arrivalTimes = MetroMath.getArrivalTimesBetweenStations(from: _departureStationIndex, to: _arrivalStationIndex);
-    _departureTime = MetroMath.getClosestArrivalTimeInList(arrivalTimes: _arrivalTimes);
+    _stationIndex = widget.stationIndex;
+    _calculateArrivalTimes();
+    timer();
   }
 
-  Time _getTimeUntilNextTrain() {
-    DateTime closest = MetroMath.getClosestArrivalTimeInList(arrivalTimes: _arrivalTimes);
+  void timer() async {
+    DateTime now = DateTime.now();
+    int millis = now.millisecond;
+    await Future.delayed(Duration(milliseconds: 1000 - millis));
+    while(true) {
+      if (!mounted) return;
+      await Future.delayed(Duration(seconds: 1));
+      setState(() {});
+    }
+  }
+
+  Time _getTimeUntilNextTrain({List<DateTime> arrivalTimes}) {
+    DateTime closest = MetroMath.getClosestArrivalTimeInList(arrivalTimes: arrivalTimes);
     if (closest == null) {
       throw "Метро не работает.";
     }
     DateTime now = DateTime.now();
     Duration difference = closest.difference(now);
 
-    Future.delayed(Duration(seconds: 1), () {
-      if (!mounted) return;
-      setState(() {});
-    });
+    if(difference == null) return null;
 
     int minutes = difference.inMinutes;
     int seconds = difference.inSeconds - difference.inMinutes * 60;
@@ -80,27 +84,14 @@ class _RouteTimerPageState extends State<RouteTimerPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  DepartureTimeWidget(
-                    arrivalStationIndex: _arrivalStationIndex,
-                    departureStationIndex: _departureStationIndex,
-                    departureTime: _departureTime,
-                  ),
-                  SizedBox(height: 16.0),
-                  ArrivalTimeWidget(
-                    arrivalStationIndex: _arrivalStationIndex,
-                    departureStationIndex: _departureStationIndex,
-                    departureTime: _departureTime,
-                  ),
-                  SizedBox(height: 16.0),
-                  TotalTimeWidget(
-                    arrivalStationIndex: _arrivalStationIndex,
-                    departureStationIndex: _departureStationIndex,
+                  NextTrainWidget(
+                    title: "В сторону Москвы",
+                    timeUntilNextTrain: (_stationIndex == 0)? null : _getTimeUntilNextTrain(arrivalTimes: _arrivalTimesInMoscowDirection),
                   ),
                   SizedBox(height: 16.0),
                   NextTrainWidget(
-                    arrivalStationIndex: _arrivalStationIndex,
-                    departureStationIndex: _departureStationIndex,
-                    timeUntilNextTrain: _getTimeUntilNextTrain(),
+                    title: "В сторону ${MetroData.stations.last}",
+                    timeUntilNextTrain: (_stationIndex == MetroData.stations.length - 1)? null : _getTimeUntilNextTrain(arrivalTimes: _arrivalTimesInRayimbekDirection),
                   ),
                 ],
               ),
