@@ -31,7 +31,7 @@ class _BottomPanelNewState extends State<BottomPanelNew> {
     int station = (await Navigator.of(context).push(
           TransparentRoute(
             builder: (_) {
-              return StationSelectionDialog();
+              return StationSelectionDialog(selectedStation: _stationIndex);
             },
           ),
         )) ??

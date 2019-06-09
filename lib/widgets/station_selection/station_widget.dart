@@ -31,13 +31,15 @@ class StationWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Станция',
+                      (isSelected) ? 'Выбранная станция' : 'Станция',
                       style: AlmetroTextStyle.caption,
                     ),
                     Text(
                       stationName,
                       style: AlmetroTextStyle.boldInformation.copyWith(
-                          fontWeight: FontWeight.w500, fontSize: 20.0),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.0,
+                          color: (isSelected) ? Colors.black45 : Colors.black),
                     ),
                   ],
                 ),
