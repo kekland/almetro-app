@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class TransparentRoute extends PageRoute<void> {
+class TransparentRoute<T> extends PageRoute<T> {
   TransparentRoute({
     @required this.builder,
     RouteSettings settings,

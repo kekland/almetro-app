@@ -1,6 +1,6 @@
 import 'package:almaty_metro/api/stations.dart';
 import 'package:almaty_metro/design/almetro_design.dart';
-import 'package:almaty_metro/widgets/content_page/station_widget.dart';
+import 'package:almaty_metro/widgets/station_selection/station_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
