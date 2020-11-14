@@ -52,7 +52,11 @@ class AppModel extends ChangeNotifier {
       _brightness = _darkTheme ? Brightness.dark : Brightness.light;
     }
 
-    _autoUpdate = SharedPrefs.instance.getBool('auto_update') ?? false;
+    _autoUpdate = SharedPrefs.instance.getBool('auto_update');
+    if (_autoUpdate == null) {
+      autoUpdate = true;
+    }
+
     if (_autoUpdate) {
       fetchFromNetwork();
     }

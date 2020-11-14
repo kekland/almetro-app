@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
 
         return MaterialApp(
           title: 'Almetro',
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primaryColor: accentRed,
             accentColor: accentRed,

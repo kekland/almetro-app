@@ -120,15 +120,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
-  dart_config:
-    dependency: transitive
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: a7ed88a4793e094a4d5d5c2d88a89e55510accde
-      url: "https://github.com/MarkOSullivan94/dart_config.git"
-    source: git
-    version: "0.5.0"
   fake_async:
     dependency: transitive
     description:
@@ -168,7 +159,7 @@ packages:
       name: flutter_launcher_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.0"
+    version: "0.8.1"
   flutter_range_slider:
     dependency: "direct main"
     description:
