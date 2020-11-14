@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 0.0.2+2
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -24,12 +24,21 @@ dependencies:
   flutter_range_slider:
   flutter_staggered_grid_view:
   font_awesome_flutter:
-
+  tuple:
+  http:
+  provider:
+  shared_preferences:
+  flutter_svg: ^0.19.1
+  circular_reveal_animation:
+  feature_discovery:
+  geolocator:
+    
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
+  test:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons:
@@ -51,6 +60,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/icon.svg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -62,64 +73,6 @@ flutter:
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.io/assets-and-images/#from-packages
-
-  fonts:
-    - family: Days
-      fonts:
-        - asset: assets/fonts/Days.ttf
-    - family: Futura
-      fonts:
-        - asset: assets/fonts/Futura.ttf
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/Roboto/Roboto-Thin.ttf
-          weight: 100
-        - asset: assets/fonts/Roboto/Roboto-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Roboto/Roboto-Black.ttf
-          weight: 900
-    - family: Inter
-      fonts: 
-        - asset: assets/fonts/Inter/Inter-Light-BETA.ttf
-          weight: 300
-        - asset: assets/fonts/Inter/Inter-LightItalic-BETA.ttf
-          weight: 300
-          style: italic
-
-        - asset: assets/fonts/Inter/Inter-Regular.ttf
-        - asset: assets/fonts/Inter/Inter-Italic.ttf
-          style: italic
-
-        - asset: assets/fonts/Inter/Inter-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Inter/Inter-MediumItalic.ttf
-          weight: 500
-          style: italic
-          
-
-        - asset: assets/fonts/Inter/Inter-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Inter/Inter-SemiBoldItalic.ttf
-          weight: 600
-          style: italic
-
-        - asset: assets/fonts/Inter/Inter-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Inter/Inter-BoldItalic.ttf
-          weight: 700
-          style: italic
-
-        - asset: assets/fonts/Inter/Inter-Black.ttf
-          weight: 800
-        - asset: assets/fonts/Inter/Inter-BlackItalic.ttf
-          weight: 800
-          style: italic
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

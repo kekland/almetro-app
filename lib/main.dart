@@ -1,25 +1,18 @@
-import 'dart:io';
-
-import 'package:almaty_metro/pages/main_page.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
+import 'package:almaty_metro/api/db.dart';
+import 'package:almaty_metro/home_page.dart';
+import 'package:almaty_metro/loading_page.dart';
+import 'package:almaty_metro/model/app_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  _setTargetPlatformForDesktop();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefs.init();
   runApp(MyApp());
 }
 
-void _setTargetPlatformForDesktop() {
-  TargetPlatform targetPlatform;
-  if (Platform.isLinux || Platform.isWindows || Platform.isFuchsia) {
-    targetPlatform = TargetPlatform.fuchsia;
-  }
-  if (targetPlatform != null) {
-    debugDefaultTargetPlatformOverride = targetPlatform;
-  }
-}
+const accentRed = const Color(0xFFE53935);
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -28,15 +21,24 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.light,
       ),
     );
-    return MaterialApp(
-      title: 'Almetro',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      home: MainPage(),
+
+    return ChangeNotifierProvider(
+      create: (context) => AppModel(),
+      builder: (context, child) {
+        final model = context.watch<AppModel>();
+
+        return MaterialApp(
+          title: 'Almetro',
+          theme: ThemeData(
+            primaryColor: accentRed,
+            accentColor: accentRed,
+            brightness: model.brightness,
+          ),
+          home: LoadingPage(),
+        );
+      },
     );
   }
 }
