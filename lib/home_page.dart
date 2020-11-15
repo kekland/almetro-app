@@ -1,6 +1,5 @@
 import 'package:almaty_metro/api/api.dart';
 import 'package:almaty_metro/utils/snackbar.dart';
-import 'package:almaty_metro/widgets/card.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature_discovery_manager.dart';
 import 'package:almaty_metro/widgets/holiday_card.dart';
@@ -56,7 +55,6 @@ class _HomePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
     final model = context.watch<AppModel>();
 
     return Scaffold(
