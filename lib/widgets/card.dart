@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 class CardWidget extends StatelessWidget {
   final Widget child;
   final bool isHidden;
+  final bool hasShadow;
   final VoidCallback onTap;
 
   const CardWidget({
@@ -11,6 +12,7 @@ class CardWidget extends StatelessWidget {
     @required this.child,
     this.isHidden = false,
     this.onTap,
+    this.hasShadow = true,
   }) : super(key: key);
 
   @override
@@ -34,13 +36,15 @@ class CardWidget extends StatelessWidget {
           : BoxDecoration(
               color: Theme.of(context).cardColor,
               borderRadius: borderRadius,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  offset: Offset(0.0, 6.0),
-                  blurRadius: 12.0,
-                ),
-              ],
+              boxShadow: hasShadow
+                  ? [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        offset: Offset(0.0, 6.0),
+                        blurRadius: 12.0,
+                      )
+                    ]
+                  : null,
             ),
     );
   }

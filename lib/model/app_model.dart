@@ -90,7 +90,6 @@ class AppModel extends ChangeNotifier {
     final now = DateTime.now();
     final holiday = subway.holidays.firstWhere(
       (v) {
-        return true;
         final time = v.item1;
         return now.day == time.day &&
             now.month == time.month &&

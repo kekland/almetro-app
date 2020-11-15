@@ -20,6 +20,7 @@ class _HolidayCardState extends State<HolidayCard> {
 
     return AnimatedCrossFade(
       firstChild: CardWidget(
+        hasShadow: false,
         child: Row(
           children: [
             Icon(Icons.notifications, color: textTheme.caption.color),
@@ -30,7 +31,9 @@ class _HolidayCardState extends State<HolidayCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Сегодня ${model.currentHoliday}!',
+                    model.currentHoliday != null
+                        ? 'Сегодня ${model.currentHoliday}!'
+                        : 'Показывается расписание на праздничные дни',
                     style: textTheme.bodyText1,
                   ),
                   SizedBox(height: 4.0),
