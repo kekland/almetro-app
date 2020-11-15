@@ -27,12 +27,11 @@ class MyApp extends StatelessWidget {
       create: (context) => AppModel(),
       builder: (context, child) {
         final model = context.watch<AppModel>();
-        final brightness = model.settings.brightness;
 
         return MaterialApp(
           title: 'Almetro',
           debugShowCheckedModeBanner: false,
-          themeMode: brightness != null ? brightness : ThemeMode.system,
+          themeMode: model.settings.themeMode,
           theme: ThemeData(
             primaryColor: accentRed,
             accentColor: accentRed,

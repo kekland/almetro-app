@@ -1,6 +1,6 @@
 import 'package:almaty_metro/model/app_model.dart';
 import 'package:almaty_metro/widgets/card.dart';
-import 'package:almaty_metro/widgets/station_picker_dialog.dart';
+import 'package:almaty_metro/dialogs/station_picker_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

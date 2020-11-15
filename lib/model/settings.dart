@@ -6,6 +6,7 @@ const KEY_LAST_STATION_ID = 'last_station_id';
 const KEY_CACHED_DATA = 'cached_data';
 const KEY_AUTO_UPDATE = 'auto_update';
 const KEY_BRIGHTNESS = 'brightness';
+const KEY_ONBOARDING_SEEN = 'onboarding_seen';
 
 class AppSettings extends ChangeNotifier {
   DateTime get lastFetchTime => DateTime.fromMillisecondsSinceEpoch(
@@ -33,9 +34,9 @@ class AppSettings extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get autoUpdate => SharedPrefs.instance.getBool(KEY_CACHED_DATA);
+  bool get autoUpdate => SharedPrefs.instance.getBool(KEY_AUTO_UPDATE);
   set autoUpdate(bool v) {
-    SharedPrefs.instance.setBool(KEY_CACHED_DATA, v);
+    SharedPrefs.instance.setBool(KEY_AUTO_UPDATE, v);
     notifyListeners();
   }
 
@@ -49,5 +50,19 @@ class AppSettings extends ChangeNotifier {
   set brightness(Brightness v) {
     SharedPrefs.instance.setInt(KEY_BRIGHTNESS, Brightness.values.indexOf(v));
     notifyListeners();
+  }
+
+  ThemeMode get themeMode {
+    if (brightness == null) return ThemeMode.system;
+
+    return brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark;
+  }
+
+  bool hasSeenOnboarding(String key) {
+    return SharedPrefs.instance.getBool('$KEY_ONBOARDING_SEEN:$key') ?? false;
+  }
+
+  void setHasSeenOnboarding(String key, bool v) {
+    SharedPrefs.instance.setBool('$KEY_ONBOARDING_SEEN:$key', v);
   }
 }

@@ -1,7 +1,7 @@
 import 'package:almaty_metro/api/api.dart';
 import 'package:almaty_metro/api/model/station.dart';
 import 'package:almaty_metro/widgets/card.dart';
-import 'package:almaty_metro/widgets/dialog_header.dart';
+import 'package:almaty_metro/dialogs/dialog_header.dart';
 import 'package:almaty_metro/widgets/item_grid.dart';
 import 'package:almaty_metro/widgets/time_display.dart';
 import 'package:flutter/material.dart';

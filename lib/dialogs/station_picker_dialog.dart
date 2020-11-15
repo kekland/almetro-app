@@ -1,6 +1,6 @@
 import 'package:almaty_metro/model/app_model.dart';
 import 'package:almaty_metro/widgets/card.dart';
-import 'package:almaty_metro/widgets/dialog_header.dart';
+import 'package:almaty_metro/dialogs/dialog_header.dart';
 import 'package:almaty_metro/widgets/item_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

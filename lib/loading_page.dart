@@ -1,5 +1,6 @@
 import 'package:almaty_metro/home_page.dart';
 import 'package:almaty_metro/model/app_model.dart';
+import 'package:almaty_metro/widgets/transitions/circular_reveal_page_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -10,10 +11,11 @@ class LoadingPage extends StatefulWidget {
 }
 
 class _LoadingPageState extends State<LoadingPage> {
+  Future _navigationFuture;
   void _navigate() {
     if (!mounted) return;
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => HomePage()),
+      CircularRevealPageRoute(builder: (_) => HomePage()),
     );
   }
 
@@ -22,7 +24,9 @@ class _LoadingPageState extends State<LoadingPage> {
     super.didChangeDependencies();
     final model = Provider.of<AppModel>(context);
 
-    if (model.subway != null) Future.delayed(Duration(seconds: 2), _navigate);
+    if (model.subway != null && _navigationFuture == null) {
+      _navigationFuture = Future.delayed(Duration(seconds: 2), _navigate);
+    }
   }
 
   @override
