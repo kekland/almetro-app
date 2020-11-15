@@ -2,7 +2,6 @@ import 'package:almaty_metro/api/model/line.dart';
 import 'package:almaty_metro/api/model/segment.dart';
 import 'package:almaty_metro/api/time.dart';
 import 'package:flutter/foundation.dart';
-import 'package:geolocator/geolocator.dart';
 
 class SubwayStation {
   final int id;

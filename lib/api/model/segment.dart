@@ -1,4 +1,3 @@
-import 'package:almaty_metro/api/model/station.dart';
 import 'package:flutter/foundation.dart';
 
 class SubwaySegment {

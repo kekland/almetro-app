@@ -1,5 +1,4 @@
 import 'package:almaty_metro/api/db.dart';
-import 'package:almaty_metro/home_page.dart';
 import 'package:almaty_metro/loading_page.dart';
 import 'package:almaty_metro/model/app_model.dart';
 import 'package:flutter/material.dart';
