@@ -1,3 +1,4 @@
+import 'package:almaty_metro/utils/snackbar.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature_discovery_manager.dart';
 import 'package:geolocator/geolocator.dart';
@@ -87,25 +88,33 @@ class _HomePageBody extends StatelessWidget {
             featureKey: 'gps',
             title: 'Определить станцию',
             description: 'Нажмите, чтобы найти ближайшую станцию по GPS',
-            child: IconButton(
-              icon: Icon(Icons.gps_fixed_rounded),
-              onPressed: () async {
-                final permission = await Geolocator.checkPermission();
+            child: Builder(
+              builder: (context) => IconButton(
+                icon: Icon(Icons.gps_fixed_rounded),
+                onPressed: () async {
+                  final permission = await Geolocator.checkPermission();
 
-                if (permission == LocationPermission.denied) {
-                  await Geolocator.requestPermission();
-                }
-                Position position;
-                try {
-                  position = await Geolocator.getCurrentPosition(
-                    timeLimit: Duration(seconds: 2),
+                  if (permission == LocationPermission.denied) {
+                    await Geolocator.requestPermission();
+                  }
+                  Position position;
+                  try {
+                    position = await Geolocator.getCurrentPosition(
+                      desiredAccuracy: LocationAccuracy.high,
+                      timeLimit: Duration(seconds: 2),
+                    );
+                  } catch (e) {
+                    position = await Geolocator.getLastKnownPosition();
+                  }
+
+                  model.selectedStation = model.getClosestStation(position);
+
+                  showMessage(
+                    context: context,
+                    message: 'Выбрана ближайшая к вам станция',
                   );
-                } catch (e) {
-                  position = await Geolocator.getLastKnownPosition();
-                }
-
-                model.selectedStation = model.getClosestStation(position);
-              },
+                },
+              ),
             ),
           ),
           Builder(
@@ -122,7 +131,14 @@ class _HomePageBody extends StatelessWidget {
         builder: (context) => Drawer(
           child: SafeArea(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
                 ListTile(
                   title: Text('Версия Almetro'),
                   subtitle: Text('v0.1.0'),
@@ -137,16 +153,14 @@ class _HomePageBody extends StatelessWidget {
                   onTap: () async {
                     try {
                       await model.fetchFromNetwork();
-                      Scaffold.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Расписание успешно обновлено'),
-                        ),
+                      showMessage(
+                        context: context,
+                        message: 'Расписание успешно обновлено',
                       );
                     } catch (e) {
-                      Scaffold.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Ошибка обновления расписания'),
-                        ),
+                      showMessage(
+                        context: context,
+                        message: 'Ошибка обновления расписания',
                       );
                     }
                   },
