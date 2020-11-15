@@ -42,7 +42,7 @@ class _ScheduleInfoDialog extends StatefulWidget {
 
 class __ScheduleInfoDialogState extends State<_ScheduleInfoDialog> {
   final ScrollController _scrollController = ScrollController();
-  final _itemExtent = 60.0;
+  final _itemExtent = 57.0;
   Timer _timer;
   bool _showDuration = false;
 

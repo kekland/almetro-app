@@ -1,6 +1,7 @@
 import 'package:almaty_metro/utils/snackbar.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature_discovery_manager.dart';
+import 'package:almaty_metro/widgets/loadable_list_tile.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:almaty_metro/model/app_model.dart';
 import 'package:almaty_metro/widgets/station_info.dart';
@@ -145,7 +146,7 @@ class _HomePageBody extends StatelessWidget {
                   trailing: Icon(Icons.verified_user_outlined),
                 ),
                 Spacer(),
-                ListTile(
+                LoadableListTile(
                   trailing: Icon(Icons.cached_rounded),
                   title: Text('Обновить расписание'),
                   subtitle: Text(
@@ -167,7 +168,7 @@ class _HomePageBody extends StatelessWidget {
                 ),
                 CheckboxListTile(
                   title: Text('Автообновление'),
-                  value: model.settings.autoUpdate,
+                  value: model.settings.autoUpdate ?? false,
                   activeColor: Theme.of(context).accentColor,
                   contentPadding: EdgeInsets.only(left: 16.0, right: 8.0),
                   onChanged: (v) => model.settings.autoUpdate = v,

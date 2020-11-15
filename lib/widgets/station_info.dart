@@ -57,9 +57,7 @@ class StationInfo extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            icon: Icon(
-                              Icons.schedule,
-                            ),
+                            icon: Icon(Icons.info_outline),
                             onPressed: () {
                               showScheduleInfoDialog(
                                 context: context,
