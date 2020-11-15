@@ -10,7 +10,7 @@ class HolidayCard extends StatefulWidget {
 }
 
 class _HolidayCardState extends State<HolidayCard> {
-  bool _isShowing = true;
+  bool _isShowing = false;
 
   @override
   Widget build(BuildContext context) {

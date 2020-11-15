@@ -171,6 +171,14 @@ class _HomePageBody extends StatelessWidget {
                     }
                   },
                 ),
+                SwitchListTile(
+                  title: Text('Показать расписание на праздники'),
+                  value: model.scheduleType == ScheduleType.holiday,
+                  activeColor: theme.accentColor,
+                  contentPadding: EdgeInsets.only(left: 16.0, right: 8.0),
+                  onChanged: (v) => model.scheduleType =
+                      v ? ScheduleType.holiday : ScheduleType.normal,
+                ),
                 CheckboxListTile(
                   title: Text('Автообновление'),
                   value: model.settings.autoUpdate ?? false,
@@ -201,8 +209,7 @@ class _HomePageBody extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
             children: [
-              if (model.scheduleType == ScheduleType.holiday)
-                HolidayCard(),
+              if (model.scheduleType == ScheduleType.holiday) HolidayCard(),
               Spacer(),
               Container(
                 alignment: Alignment.bottomCenter,
@@ -210,7 +217,8 @@ class _HomePageBody extends StatelessWidget {
                   key: stationInfoDiscoverableKey,
                   featureKey: 'station-info',
                   title: 'Информация о поездах',
-                  description: 'Здесь показывается время до прибытия следующего позеда',
+                  description:
+                      'Здесь показывается время до прибытия следующего позеда',
                   child: StationInfo(),
                 ),
               ),
