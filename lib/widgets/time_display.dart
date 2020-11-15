@@ -6,16 +6,18 @@ import 'package:flutter/material.dart';
 class TimeDisplay extends StatelessWidget {
   final Time time;
   final TextStyle style;
+  final bool isNow;
 
   TimeDisplay({
     Key key,
     @required this.time,
     this.style,
+    this.isNow = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    final text = Text(
       time.toString(),
       style: Theme.of(context)
           .textTheme
@@ -24,6 +26,16 @@ class TimeDisplay extends StatelessWidget {
             fontWeight: FontWeight.w600,
           )
           .merge(style),
+    );
+
+    if (!isNow) return text;
+
+    return Row(
+      children: [
+        text,
+        Spacer(),
+        Text('сейчас', style: Theme.of(context).textTheme.caption),
+      ],
     );
   }
 }
