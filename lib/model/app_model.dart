@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:almaty_metro/api/api.dart';
+import 'package:almaty_metro/model/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 class AppModel extends ChangeNotifier {
   final api = AlmetroApi();
+  final settings = AppSettings();
 
   Subway subway;
   bool isFetching = false;
@@ -15,53 +17,29 @@ class AppModel extends ChangeNotifier {
   SubwayStation _selectedStation;
 
   SubwayStation get selectedStation => _selectedStation;
+
+  set selectedStation(SubwayStation station) {
+    _selectedStation = station;
+    settings.lastStationId = station.id;
+    notifyListeners();
+  }
+
   int get selectedStationIndex => subwayLine.getStationIndex(_selectedStation);
   int get stationsLength => subwayLine.stations.length;
-
-  DateTime _lastFetchTime;
-  DateTime get lastFetchTime => _lastFetchTime;
-
-  bool _autoUpdate = false;
-  bool get autoUpdate => _autoUpdate;
-  set autoUpdate(bool v) {
-    _autoUpdate = v;
-    SharedPrefs.instance.setBool('auto_update', _autoUpdate);
-    notifyListeners();
-  }
-
-  set selectedStation(SubwayStation v) {
-    _selectedStation = v;
-    SharedPrefs.instance.setInt('last_station_id', v.id);
-    notifyListeners();
-  }
-
-  Brightness _brightness;
-  Brightness get brightness => _brightness;
-  set brightness(Brightness brightness) {
-    _brightness = brightness;
-    SharedPrefs.instance.setBool('dark_theme', _brightness == Brightness.dark);
-    notifyListeners();
-  }
 
   SubwayLine get subwayLine => subway.schedules[scheduleType].lines[0];
 
   AppModel() {
-    final _darkTheme = SharedPrefs.instance.getBool('dark_theme');
+    settings.addListener(notifyListeners);
+    initialFetch();
+  }
 
-    if (_darkTheme != null) {
-      _brightness = _darkTheme ? Brightness.dark : Brightness.light;
+  Future<void> initialFetch() async {
+    await loadFromCache();
+
+    if (subway == null || settings.autoUpdate) {
+      await fetchFromNetwork();
     }
-
-    _autoUpdate = SharedPrefs.instance.getBool('auto_update');
-    if (_autoUpdate == null) {
-      autoUpdate = true;
-    }
-
-    if (_autoUpdate) {
-      fetchFromNetwork();
-    }
-
-    loadFromCache();
   }
 
   Future<void> fetchFromNetwork() async {
@@ -70,18 +48,11 @@ class AppModel extends ChangeNotifier {
 
     try {
       final response = await api.downloadSubwayData();
+
       setSubway(api.getSubwayFromResponse(response));
 
-      SharedPrefs.instance.setString(
-        'cached_data',
-        jsonEncode(response),
-      );
-
-      _lastFetchTime = DateTime.now();
-      SharedPrefs.instance.setInt(
-        'last_fetch_time',
-        _lastFetchTime.millisecondsSinceEpoch,
-      );
+      settings.cachedData = json.encode(response);
+      settings.lastFetchTime = DateTime.now();
     } catch (e) {
       print(e);
     }
@@ -91,14 +62,10 @@ class AppModel extends ChangeNotifier {
   }
 
   Future<void> loadFromCache() async {
-    final cache = SharedPrefs.instance.getString('cached_data');
+    final cache = settings.cachedData;
     if (cache == null) {
       return;
     }
-
-    _lastFetchTime = DateTime.fromMillisecondsSinceEpoch(
-      SharedPrefs.instance.getInt('last_fetch_time'),
-    );
 
     setSubway(api.getSubwayFromResponse(jsonDecode(cache)));
     notifyListeners();
@@ -107,12 +74,12 @@ class AppModel extends ChangeNotifier {
   void setSubway(Subway subway) {
     this.subway = subway;
 
-    final id = SharedPrefs.instance.getInt('last_station_id');
+    final id = settings.lastStationId;
 
     _selectedStation =
         id != null ? subwayLine.getStationWithId(id) : subwayLine.stations[0];
 
-    SharedPrefs.instance.setInt('last_station_id', _selectedStation.id);
+    settings.lastStationId = id;
   }
 
   SubwayStation getClosestStation(Position position) {

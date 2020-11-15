@@ -87,7 +87,7 @@ class HomePage extends StatelessWidget {
                   trailing: Icon(Icons.cached_rounded),
                   title: Text('Обновить расписание'),
                   subtitle: Text(
-                      'Обновлено: ${MaterialLocalizations.of(context).formatShortMonthDay(model.lastFetchTime)}'),
+                      'Обновлено: ${MaterialLocalizations.of(context).formatShortMonthDay(model.settings.lastFetchTime)}'),
                   onTap: () async {
                     try {
                       await model.fetchFromNetwork();
@@ -107,21 +107,22 @@ class HomePage extends StatelessWidget {
                 ),
                 CheckboxListTile(
                   title: Text('Автообновление'),
-                  value: model.autoUpdate,
+                  value: model.settings.autoUpdate,
                   activeColor: Theme.of(context).accentColor,
                   contentPadding: EdgeInsets.only(left: 16.0, right: 8.0),
-                  onChanged: (v) => model.autoUpdate = v,
+                  onChanged: (v) => model.settings.autoUpdate = v,
                 ),
                 ListTile(
                   trailing: Icon(Icons.lightbulb_outline),
                   title: Text('Сменить тему'),
                   onTap: () {
-                    final currentBrightness = model.brightness ??
+                    final currentBrightness = model.settings.brightness ??
                         MediaQuery.of(context).platformBrightness;
 
-                    model.brightness = currentBrightness == Brightness.light
-                        ? Brightness.dark
-                        : Brightness.light;
+                    model.settings.brightness =
+                        currentBrightness == Brightness.light
+                            ? Brightness.dark
+                            : Brightness.light;
                   },
                 ),
               ],
