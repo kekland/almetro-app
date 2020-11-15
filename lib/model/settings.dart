@@ -7,6 +7,7 @@ const KEY_CACHED_DATA = 'cached_data';
 const KEY_AUTO_UPDATE = 'auto_update';
 const KEY_BRIGHTNESS = 'brightness';
 const KEY_ONBOARDING_SEEN = 'onboarding_seen';
+const KEY_SCHEDULE_INFO_SHOW_DURATION = 'schedule_info_show_duration';
 
 class AppSettings extends ChangeNotifier {
   DateTime get lastFetchTime => DateTime.fromMillisecondsSinceEpoch(
@@ -65,4 +66,10 @@ class AppSettings extends ChangeNotifier {
   void setHasSeenOnboarding(String key, bool v) {
     SharedPrefs.instance.setBool('$KEY_ONBOARDING_SEEN:$key', v);
   }
+
+  bool get scheduleInfoShowDuration =>
+      SharedPrefs.instance.getBool('$KEY_SCHEDULE_INFO_SHOW_DURATION') ?? false;
+
+  set scheduleInfoShowDuration(bool v) =>
+      SharedPrefs.instance.setBool('$KEY_SCHEDULE_INFO_SHOW_DURATION', v);
 }

@@ -43,11 +43,15 @@ class TimeDisplay extends StatelessWidget {
 class DurationDisplay extends StatelessWidget {
   final Duration duration;
   final TextStyle style;
+  final bool showLeadingText;
+  final bool isNow;
 
   const DurationDisplay({
     Key key,
     @required this.duration,
     this.style,
+    this.showLeadingText = false,
+    this.isNow = false,
   }) : super(key: key);
 
   @override
@@ -70,9 +74,10 @@ class DurationDisplay extends StatelessWidget {
 
     final captionStyle = theme.textTheme.caption;
 
-    return Text.rich(
+    final text = Text.rich(
       TextSpan(
         children: [
+          if (showLeadingText) TextSpan(text: 'через  ', style: captionStyle),
           if (hours > 0) ...[
             TextSpan(text: hours.toString(), style: numberStyle),
             TextSpan(text: 'час  ', style: captionStyle),
@@ -83,6 +88,16 @@ class DurationDisplay extends StatelessWidget {
           TextSpan(text: 'сек', style: captionStyle)
         ],
       ),
+    );
+
+    if (!isNow) return text;
+
+    return Row(
+      children: [
+        text,
+        Spacer(),
+        Text('сейчас', style: captionStyle),
+      ],
     );
   }
 }

@@ -1,11 +1,14 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:almaty_metro/api/api.dart';
 import 'package:almaty_metro/api/model/station.dart';
+import 'package:almaty_metro/model/app_model.dart';
 import 'package:almaty_metro/widgets/card.dart';
 import 'package:almaty_metro/dialogs/dialog_header.dart';
 import 'package:almaty_metro/widgets/time_display.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void showScheduleInfoDialog({
   BuildContext context,
@@ -39,19 +42,25 @@ class _ScheduleInfoDialog extends StatefulWidget {
 
 class __ScheduleInfoDialogState extends State<_ScheduleInfoDialog> {
   final ScrollController _scrollController = ScrollController();
-  final itemExtent = 60.0;
+  final _itemExtent = 60.0;
+  Timer _timer;
+  bool _showDuration = false;
 
   @override
   void initState() {
     super.initState();
 
+    _showDuration =
+        context.read<AppModel>().settings.scheduleInfoShowDuration ?? false;
+
+    _timer = Timer.periodic(Duration(seconds: 1), (_) => setState(() {}));
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final nowTime = Time.now();
       final closestTime = widget.schedule.firstWhere((v) => v > nowTime);
       final index = widget.schedule.indexOf(closestTime);
 
       _scrollController.animateTo(
-        itemExtent * max(0, index - 3),
+        _itemExtent * max(0, index - 3),
         duration: const Duration(milliseconds: 550),
         curve: Curves.fastLinearToSlowEaseIn,
       );
@@ -60,6 +69,7 @@ class __ScheduleInfoDialogState extends State<_ScheduleInfoDialog> {
 
   @override
   void dispose() {
+    _timer.cancel();
     _scrollController.dispose();
     super.dispose();
   }
@@ -90,15 +100,22 @@ class __ScheduleInfoDialogState extends State<_ScheduleInfoDialog> {
                 final isClosest = closestTime == time;
 
                 return CardWidget(
-                  child: TimeDisplay(
-                    time: time,
-                    isNow: isClosest,
-                    style: !isInFuture
-                        ? TextStyle(
-                            color: textTheme.headline6.color.withOpacity(0.4),
-                          )
-                        : null,
-                  ),
+                  child: _showDuration && isInFuture
+                      ? DurationDisplay(
+                          duration: nowTime.difference(time),
+                          isNow: isClosest,
+                          showLeadingText: true,
+                        )
+                      : TimeDisplay(
+                          time: time,
+                          isNow: isClosest,
+                          style: !isInFuture
+                              ? TextStyle(
+                                  color: textTheme.headline6.color
+                                      .withOpacity(0.4),
+                                )
+                              : null,
+                        ),
                 );
               },
             ),
@@ -112,6 +129,8 @@ class __ScheduleInfoDialogState extends State<_ScheduleInfoDialog> {
                     flex: 1,
                     child: Text(
                       widget.from.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: stationStyle,
                     ),
                   ),
@@ -121,10 +140,27 @@ class __ScheduleInfoDialogState extends State<_ScheduleInfoDialog> {
                     child: Text(
                       widget.to.name,
                       style: stationStyle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.right,
                     ),
                   ),
                   SizedBox(width: 12.0),
+                  IconButton(
+                    icon: Icon(Icons.timer),
+                    color: _showDuration ? Theme.of(context).accentColor : null,
+                    onPressed: () {
+                      final _newShowDuration = !_showDuration;
+                      context
+                          .read<AppModel>()
+                          .settings
+                          .scheduleInfoShowDuration = _newShowDuration;
+
+                      setState(
+                        () => _showDuration = _newShowDuration,
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

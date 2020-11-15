@@ -1,4 +1,3 @@
-import 'package:almaty_metro/api/api.dart';
 import 'package:almaty_metro/model/app_model.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature.dart';
 import 'package:flutter/material.dart';
