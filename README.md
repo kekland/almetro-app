@@ -13,9 +13,9 @@ flutter run
 ```
 
 ## Screenshots
-Screenshot 1               |  Screenshot 2
-:-------------------------:|:-------------------------:
-![Screenshot 1](./screenshots/Screenshot_20190324-213956.jpg)  |  ![Screenshot 2](./screenshots/Screenshot_20190324-214008.jpg)
+Screenshot 1               |  Screenshot 2             |  Screenshot 3
+:-------------------------:|:-------------------------:|:-------------------------:
+![Screenshot 1](./play_market_assets/screenshot-1.png)  |  ![Screenshot 2](./play_market_assets/screenshot-2.png)  | ![Screenshot 3](./play_market_assets/screenshot-3.png)
 
  
 
