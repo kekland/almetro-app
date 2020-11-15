@@ -35,7 +35,7 @@ class AppSettings extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get autoUpdate => SharedPrefs.instance.getBool(KEY_AUTO_UPDATE);
+  bool get autoUpdate => SharedPrefs.instance.getBool(KEY_AUTO_UPDATE) ?? false;
   set autoUpdate(bool v) {
     SharedPrefs.instance.setBool(KEY_AUTO_UPDATE, v);
     notifyListeners();

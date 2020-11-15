@@ -11,7 +11,7 @@ class AppModel extends ChangeNotifier {
   final settings = AppSettings();
 
   Subway subway;
-  bool isFetching = false;
+  bool isFetching = true;
 
   String _currentHoliday;
   ScheduleType _scheduleType = ScheduleType.normal;
@@ -46,7 +46,9 @@ class AppModel extends ChangeNotifier {
   }
 
   Future<void> initialFetch() async {
-    await loadFromCache();
+    await loadFromCache(false);
+
+    if (subway != null) notifyListeners();
 
     if (subway == null || settings.autoUpdate) {
       await fetchFromNetwork();
@@ -72,14 +74,17 @@ class AppModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loadFromCache() async {
+  Future<void> loadFromCache([bool notify = true]) async {
     final cache = settings.cachedData;
     if (cache == null) {
       return;
     }
 
     setSubway(api.getSubwayFromResponse(jsonDecode(cache)));
-    notifyListeners();
+
+    if (notify) {
+      notifyListeners();
+    }
   }
 
   void setSubway(Subway subway) {
