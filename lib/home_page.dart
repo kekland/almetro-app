@@ -1,6 +1,9 @@
+import 'package:almaty_metro/api/api.dart';
 import 'package:almaty_metro/utils/snackbar.dart';
+import 'package:almaty_metro/widgets/card.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature_discovery_manager.dart';
+import 'package:almaty_metro/widgets/holiday_card.dart';
 import 'package:almaty_metro/widgets/loadable_list_tile.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:almaty_metro/model/app_model.dart';
@@ -52,6 +55,8 @@ class _HomePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     final model = context.watch<AppModel>();
 
     return Scaffold(
@@ -72,16 +77,16 @@ class _HomePageBody extends StatelessWidget {
         title: Text(
           'Almetro',
           style: TextStyle(
-            color: Theme.of(context).colorScheme.onSurface,
+            color: theme.colorScheme.onSurface,
             fontWeight: FontWeight.w600,
           ),
         ),
         centerTitle: false,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        brightness: Theme.of(context).brightness,
+        backgroundColor: theme.scaffoldBackgroundColor,
+        brightness: theme.brightness,
         elevation: 0.0,
         iconTheme: IconThemeData(
-          color: Theme.of(context).colorScheme.onSurface,
+          color: theme.colorScheme.onSurface,
         ),
         actions: [
           DiscoverableFeature(
@@ -169,7 +174,7 @@ class _HomePageBody extends StatelessWidget {
                 CheckboxListTile(
                   title: Text('Автообновление'),
                   value: model.settings.autoUpdate ?? false,
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: theme.accentColor,
                   contentPadding: EdgeInsets.only(left: 16.0, right: 8.0),
                   onChanged: (v) => model.settings.autoUpdate = v,
                 ),
@@ -194,15 +199,22 @@ class _HomePageBody extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Container(
-            alignment: Alignment.bottomCenter,
-            child: DiscoverableFeature(
-              key: stationInfoDiscoverableKey,
-              featureKey: 'station-info',
-              title: 'Информация о поездах',
-              description: 'Здесь показывается время до следующего позеда',
-              child: StationInfo(),
-            ),
+          child: Column(
+            children: [
+              if (model.scheduleType == ScheduleType.holiday)
+                HolidayCard(),
+              Spacer(),
+              Container(
+                alignment: Alignment.bottomCenter,
+                child: DiscoverableFeature(
+                  key: stationInfoDiscoverableKey,
+                  featureKey: 'station-info',
+                  title: 'Информация о поездах',
+                  description: 'Здесь показывается время до прибытия следующего позеда',
+                  child: StationInfo(),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -212,7 +224,7 @@ class _HomePageBody extends StatelessWidget {
           child: DiscoverableFeature(
             key: stationPickerDiscoverableKey,
             featureKey: 'station-picker',
-            title: 'Выбирайте станции',
+            title: 'Выберите станцию',
             description: 'Нажмите, чтобы показать все станции',
             child: StationPicker(),
           ),

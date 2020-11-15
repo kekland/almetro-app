@@ -8,8 +8,5 @@ void main() {
     final api = AlmetroApi();
     final data = await api.downloadSubwayData();
     final subway = api.getSubwayFromResponse(data);
-
-    print(subway.toJson());
-    print(jsonEncode(subway.toJson()));
   });
 }

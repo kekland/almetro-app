@@ -108,9 +108,9 @@ class AlmetroApi implements Api {
     return Subway(
       holidays: response['holidays']
           .map(
-            (v) => DateTime.parse(v['date']),
+            (v) => Tuple2(DateTime.parse(v['date']), v['name'] as String),
           )
-          .cast<DateTime>()
+          .cast<Tuple2<DateTime, String>>()
           .toList(),
       schedules: Map.fromEntries(
         ScheduleType.values.map(

@@ -13,10 +13,15 @@ class AppModel extends ChangeNotifier {
   Subway subway;
   bool isFetching = false;
 
-  ScheduleType scheduleType = ScheduleType.normal;
+  String _currentHoliday;
+  ScheduleType _scheduleType = ScheduleType.normal;
+
   SubwayStation _selectedStation;
 
   SubwayStation get selectedStation => _selectedStation;
+  String get currentHoliday => _currentHoliday;
+
+  bool get isHoliday => _scheduleType == ScheduleType.holiday;
 
   set selectedStation(SubwayStation station) {
     _selectedStation = station;
@@ -27,7 +32,13 @@ class AppModel extends ChangeNotifier {
   int get selectedStationIndex => subwayLine.getStationIndex(_selectedStation);
   int get stationsLength => subwayLine.stations.length;
 
-  SubwayLine get subwayLine => subway.schedules[scheduleType].lines[0];
+  SubwayLine get subwayLine => subway.schedules[_scheduleType].lines[0];
+
+  ScheduleType get scheduleType => _scheduleType;
+  set scheduleType(ScheduleType type) {
+    _scheduleType = type;
+    notifyListeners();
+  }
 
   AppModel() {
     settings.addListener(notifyListeners);
@@ -75,6 +86,23 @@ class AppModel extends ChangeNotifier {
     this.subway = subway;
 
     final id = settings.lastStationId;
+
+    final now = DateTime.now();
+    final holiday = subway.holidays.firstWhere(
+      (v) {
+        return true;
+        final time = v.item1;
+        return now.day == time.day &&
+            now.month == time.month &&
+            now.year == time.year;
+      },
+      orElse: () => null,
+    );
+
+    _scheduleType =
+        holiday != null ? ScheduleType.holiday : ScheduleType.normal;
+
+    _currentHoliday = holiday?.item2;
 
     _selectedStation =
         id != null ? subwayLine.getStationWithId(id) : subwayLine.stations[0];
