@@ -25,7 +25,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Almetro needs access to location when open for obtaining the closest station.</string>
+	<string>Almetro needs access to location when the app is open for showing the subway station that&apos;s closest to the user.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
