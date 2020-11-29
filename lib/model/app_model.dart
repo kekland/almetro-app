@@ -37,6 +37,8 @@ class AppModel extends ChangeNotifier {
   ScheduleType get scheduleType => _scheduleType;
   set scheduleType(ScheduleType type) {
     _scheduleType = type;
+    selectedStation = subwayLine.getStationWithId(_selectedStation.id);
+
     notifyListeners();
   }
 
@@ -103,10 +105,14 @@ class AppModel extends ChangeNotifier {
       orElse: () => null,
     );
 
-    _scheduleType =
-        holiday != null ? ScheduleType.holiday : ScheduleType.normal;
-
-    _currentHoliday = holiday?.item2;
+    if (holiday != null) {
+      _scheduleType = ScheduleType.holiday;
+      _currentHoliday = holiday.item2;
+    } else if (now.weekday >= DateTime.saturday) {
+      _scheduleType = ScheduleType.holiday;
+    } else {
+      _scheduleType = ScheduleType.normal;
+    }
 
     _selectedStation =
         id != null ? subwayLine.getStationWithId(id) : subwayLine.stations[0];

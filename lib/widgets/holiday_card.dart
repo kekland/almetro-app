@@ -33,7 +33,7 @@ class _HolidayCardState extends State<HolidayCard> {
                   Text(
                     model.currentHoliday != null
                         ? 'Сегодня ${model.currentHoliday}!'
-                        : 'Показывается расписание на праздничные дни',
+                        : 'Показывается расписание на выходные',
                     style: textTheme.bodyText1,
                   ),
                   SizedBox(height: 4.0),
@@ -62,7 +62,7 @@ class _HolidayCardState extends State<HolidayCard> {
             SizedBox(width: 12.0),
             Expanded(
               child: Text(
-                'Показывается расписание на праздничные дни',
+                'Показывается расписание на выходные',
                 style: textTheme.bodyText1,
               ),
             ),

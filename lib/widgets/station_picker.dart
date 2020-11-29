@@ -21,13 +21,16 @@ class StationPicker extends StatelessWidget {
         children: [
           IconButton(
             icon: Icon(Icons.chevron_left),
-            color: Theme.of(context).accentColor,
+            color: canSwipeLeft
+                ? Theme.of(context).accentColor
+                : Theme.of(context).disabledColor,
+            splashRadius: canSwipeLeft ? null : 0.1,
             onPressed: canSwipeLeft
                 ? () {
                     model.selectedStation = model
                         .subwayLine.stations[model.selectedStationIndex - 1];
                   }
-                : null,
+                : () {},
           ),
           Expanded(
             child: Column(
@@ -49,13 +52,16 @@ class StationPicker extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(Icons.chevron_right),
-            color: Theme.of(context).accentColor,
+            color: canSwipeRight
+                ? Theme.of(context).accentColor
+                : Theme.of(context).disabledColor,
+            splashRadius: canSwipeRight ? null : 0.1,
             onPressed: canSwipeRight
                 ? () {
                     model.selectedStation = model
                         .subwayLine.stations[model.selectedStationIndex + 1];
                   }
-                : null,
+                : () {},
           ),
         ],
       ),

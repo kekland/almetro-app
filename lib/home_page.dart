@@ -170,7 +170,7 @@ class _HomePageBody extends StatelessWidget {
                   },
                 ),
                 SwitchListTile(
-                  title: Text('Показать расписание на праздники'),
+                  title: Text('Показать расписание на выходные'),
                   value: model.scheduleType == ScheduleType.holiday,
                   activeColor: theme.accentColor,
                   contentPadding: EdgeInsets.only(left: 16.0, right: 8.0),
