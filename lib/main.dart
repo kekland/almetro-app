@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
             if (list.contains(locale)) return locale;
             return Locale('ru');
           },
-          locale: Locale('kk'),
           theme: ThemeData(
             primaryColor: accentRed,
             accentColor: accentRed,
