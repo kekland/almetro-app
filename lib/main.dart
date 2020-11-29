@@ -1,5 +1,4 @@
 import 'package:almaty_metro/api/db.dart';
-import 'package:almaty_metro/l10n/delegate.dart';
 import 'package:almaty_metro/l10n/localization.dart';
 import 'package:almaty_metro/loading_page.dart';
 import 'package:almaty_metro/model/app_model.dart';

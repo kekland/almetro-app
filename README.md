@@ -4,7 +4,11 @@ Tracking subway trains in Almaty made easy.
 
 ## Download
 
-Play Market: [Link](https://play.google.com/store/apps/details?id=com.kekland.almetro)
+Google Play: [Link](https://play.google.com/store/apps/details?id=com.kekland.almetro)
+
+App Store: [Link](https://apps.apple.com/us/app/almetro/id1540955660)
+
+VK: [Link](https://vk.com/almetro)
 
 ## Debugging
 
