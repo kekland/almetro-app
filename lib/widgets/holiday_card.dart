@@ -1,3 +1,4 @@
+import 'package:almaty_metro/l10n/localization.dart';
 import 'package:almaty_metro/model/app_model.dart';
 import 'package:almaty_metro/widgets/card.dart';
 import 'package:flutter/material.dart';
@@ -32,13 +33,13 @@ class _HolidayCardState extends State<HolidayCard> {
                 children: [
                   Text(
                     model.currentHoliday != null
-                        ? 'Сегодня ${model.currentHoliday}!'
-                        : 'Показывается расписание на выходные',
+                        ? '${context.l10n.labelToday} ${model.currentHoliday}!'
+                        : context.l10n.labelShowingHolidaySchedule,
                     style: textTheme.bodyText1,
                   ),
                   SizedBox(height: 4.0),
                   Text(
-                    'Сменить расписание можно в настройках',
+                    context.l10n.labelChangeSettings,
                     style: textTheme.caption,
                   ),
                 ],
@@ -62,7 +63,7 @@ class _HolidayCardState extends State<HolidayCard> {
             SizedBox(width: 12.0),
             Expanded(
               child: Text(
-                'Показывается расписание на выходные',
+                context.l10n.labelShowingHolidaySchedule,
                 style: textTheme.bodyText1,
               ),
             ),

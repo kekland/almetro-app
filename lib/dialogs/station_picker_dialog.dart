@@ -1,3 +1,4 @@
+import 'package:almaty_metro/l10n/localization.dart';
 import 'package:almaty_metro/model/app_model.dart';
 import 'package:almaty_metro/widgets/card.dart';
 import 'package:almaty_metro/dialogs/dialog_header.dart';
@@ -34,7 +35,7 @@ void showStationPickerDialog(BuildContext context) async {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    station.name,
+                                    context.l10n.getSubwayStationName(station),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: Theme.of(context)
@@ -65,7 +66,7 @@ void showStationPickerDialog(BuildContext context) async {
                 padding: const EdgeInsets.only(top: 12.0),
                 child: DialogHeader(
                   child: Text(
-                    'Выберите станцию',
+                    context.l10n.featureDiscoveryStationPickerTitle,
                     style: Theme.of(context)
                         .textTheme
                         .headline6

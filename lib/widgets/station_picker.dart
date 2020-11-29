@@ -1,3 +1,4 @@
+import 'package:almaty_metro/l10n/localization.dart';
 import 'package:almaty_metro/model/app_model.dart';
 import 'package:almaty_metro/widgets/card.dart';
 import 'package:almaty_metro/dialogs/station_picker_dialog.dart';
@@ -38,11 +39,11 @@ class StationPicker extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Станция',
+                  context.l10n.labelStation,
                   style: theme.textTheme.caption,
                 ),
                 Text(
-                  model.selectedStation.name,
+                  context.l10n.getSubwayStationName(model.selectedStation),
                   style: theme.textTheme.headline6.copyWith(
                     fontWeight: FontWeight.w600,
                   ),

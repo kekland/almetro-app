@@ -1,4 +1,5 @@
 import 'package:almaty_metro/home_page.dart';
+import 'package:almaty_metro/l10n/localization.dart';
 import 'package:almaty_metro/model/app_model.dart';
 import 'package:almaty_metro/widgets/transitions/circular_reveal_page_route.dart';
 import 'package:flutter/material.dart';
@@ -87,13 +88,13 @@ class _LoadingPageState extends State<LoadingPage> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                'Произошла ошибка при загрузке',
+                                context.l10n.labelLoadingError,
                                 style: textTheme.bodyText1,
                               ),
                             ],
                           ),
                           Text(
-                            'Если вы запускаете приложение в первый раз - пожалуйста, проверьте подключение к сети.',
+                            context.l10n.labelLoadingErrorTooltip,
                             style: textTheme.caption,
                             textAlign: TextAlign.center,
                           ),
@@ -116,7 +117,7 @@ class _LoadingPageState extends State<LoadingPage> {
                                 context.read<AppModel>().fetchFromNetwork();
                               });
                             },
-                            label: Text('Повторить попытку'),
+                            label: Text(context.l10n.labelTryAgain),
                           ),
                         ],
                       ],

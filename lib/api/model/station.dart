@@ -2,10 +2,49 @@ import 'package:almaty_metro/api/model/line.dart';
 import 'package:almaty_metro/api/model/segment.dart';
 import 'package:almaty_metro/api/time.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+
+class SubwayStationName {
+  final String kk;
+  final String ru;
+  final String en;
+
+  SubwayStationName({
+    @required this.kk,
+    @required this.ru,
+    @required this.en,
+  });
+
+  Map<String, dynamic> toJson() => {'kk': kk, 'ru': ru, 'en': en};
+
+  String resolveFromLocale(
+    Locale locale, [
+    Locale fallbackLocale = const Locale('ru'),
+  ]) {
+    switch (locale.languageCode) {
+      case 'ru':
+        return ru;
+      case 'kk':
+        return kk;
+      case 'en':
+        return en;
+      default:
+        return resolveFromLocale(fallbackLocale);
+    }
+  }
+
+  factory SubwayStationName.fromJson(Map<String, dynamic> json) {
+    return SubwayStationName(
+      kk: json['kk'],
+      ru: json['ru'],
+      en: json['en'],
+    );
+  }
+}
 
 class SubwayStation {
   final int id;
-  final String name;
+  final SubwayStationName name;
 
   /// Key is [SubwayLine.id]
   final Map<int, List<SubwaySegment>> connections;
@@ -63,7 +102,7 @@ class SubwayStation {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'name': name,
+      'name': name.toJson(),
       'connections': connections.map(
         (k, v) => MapEntry(k.toString(), v.map((c) => c.toJson()).toList()),
       ),

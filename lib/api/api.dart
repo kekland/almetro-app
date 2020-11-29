@@ -63,7 +63,11 @@ class AlmetroApi implements Api {
     for (final _station in _stations) {
       final station = SubwayStation(
         id: int.parse(_station['id']),
-        name: _station['name'],
+        name: SubwayStationName(
+          ru: _station['name'],
+          en: _station['name_eng'],
+          kk: _station['name_kaz'],
+        ),
         order: int.parse(_station['station_order']),
         latitude: double.parse(_station['latitude']),
         longitude: double.parse(_station['longitude']),

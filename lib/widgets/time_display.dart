@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:almaty_metro/api/api.dart';
 import 'package:flutter/material.dart';
+import 'package:almaty_metro/l10n/localization.dart';
 
 class TimeDisplay extends StatelessWidget {
   final Time time;
@@ -34,7 +35,10 @@ class TimeDisplay extends StatelessWidget {
       children: [
         text,
         Spacer(),
-        Text('сейчас', style: Theme.of(context).textTheme.caption),
+        Text(
+          context.l10n.labelDateTimeNow,
+          style: Theme.of(context).textTheme.caption,
+        ),
       ],
     );
   }
@@ -77,15 +81,25 @@ class DurationDisplay extends StatelessWidget {
     final text = Text.rich(
       TextSpan(
         children: [
-          if (showLeadingText) TextSpan(text: 'через  ', style: captionStyle),
+          if (showLeadingText)
+            TextSpan(
+              text: '${context.l10n.labelDateTimeIn}  ',
+              style: captionStyle,
+            ),
           if (hours > 0) ...[
             TextSpan(text: hours.toString(), style: numberStyle),
-            TextSpan(text: 'час  ', style: captionStyle),
+            TextSpan(
+              text: '${context.l10n.labelShortHour}  ',
+              style: captionStyle,
+            ),
           ],
           TextSpan(text: minutes.toString(), style: numberStyle),
-          TextSpan(text: 'мин  ', style: captionStyle),
+          TextSpan(
+            text: '${context.l10n.labelShortMinute}  ',
+            style: captionStyle,
+          ),
           TextSpan(text: seconds.toString(), style: numberStyle),
-          TextSpan(text: 'сек', style: captionStyle)
+          TextSpan(text: context.l10n.labelShortSecond, style: captionStyle),
         ],
       ),
     );

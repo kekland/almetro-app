@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:almaty_metro/api/api.dart';
 import 'package:almaty_metro/api/model/station.dart';
+import 'package:almaty_metro/l10n/localization.dart';
 import 'package:almaty_metro/model/app_model.dart';
 import 'package:almaty_metro/widgets/card.dart';
 import 'package:almaty_metro/dialogs/dialog_header.dart';
@@ -128,7 +129,7 @@ class __ScheduleInfoDialogState extends State<_ScheduleInfoDialog> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      widget.from.name,
+                      context.l10n.getSubwayStationName(widget.from),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: stationStyle,
@@ -138,7 +139,7 @@ class __ScheduleInfoDialogState extends State<_ScheduleInfoDialog> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      widget.to.name,
+                      context.l10n.getSubwayStationName(widget.to),
                       style: stationStyle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

@@ -1,3 +1,4 @@
+import 'package:almaty_metro/l10n/localization.dart';
 import 'package:almaty_metro/model/app_model.dart';
 import 'package:almaty_metro/widgets/card.dart';
 import 'package:almaty_metro/dialogs/schedule_info_dialog.dart';
@@ -35,13 +36,13 @@ class StationInfo extends StatelessWidget {
                               children: [
                                 Text.rich(
                                   TextSpan(
-                                    text: 'На станцию ',
+                                    text: '${context.l10n.labelToStation} ',
                                     style: textTheme.caption,
                                     children: [
                                       TextSpan(
-                                        text: model.subwayLine
-                                            .getStationWithId(k)
-                                            .name,
+                                        text: context.l10n.getSubwayStationName(
+                                          model.subwayLine.getStationWithId(k),
+                                        ),
                                         style: textTheme.bodyText1.copyWith(
                                           fontWeight: FontWeight.w600,
                                         ),

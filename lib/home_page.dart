@@ -1,4 +1,5 @@
 import 'package:almaty_metro/api/api.dart';
+import 'package:almaty_metro/l10n/localization.dart';
 import 'package:almaty_metro/utils/snackbar.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature_discovery_manager.dart';
@@ -90,8 +91,8 @@ class _HomePageBody extends StatelessWidget {
           DiscoverableFeature(
             key: gpsDiscoverableKey,
             featureKey: 'gps',
-            title: 'Определить станцию',
-            description: 'Нажмите, чтобы найти ближайшую станцию по GPS',
+            title: context.l10n.featureDiscoveryGpsTitle,
+            description: context.l10n.featureDiscoveryGpsDescription,
             child: Builder(
               builder: (context) => IconButton(
                 icon: Icon(Icons.gps_fixed_rounded),
@@ -115,7 +116,7 @@ class _HomePageBody extends StatelessWidget {
 
                   showMessage(
                     context: context,
-                    message: 'Выбрана ближайшая к вам станция',
+                    message: context.l10n.snackbarGpsResultSuccess,
                   );
                 },
               ),
@@ -151,7 +152,7 @@ class _HomePageBody extends StatelessWidget {
                 Spacer(),
                 LoadableListTile(
                   trailing: Icon(Icons.cached_rounded),
-                  title: Text('Обновить расписание'),
+                  title: Text(context.l10n.labelRefreshCache),
                   subtitle: Text(
                       'Обновлено: ${MaterialLocalizations.of(context).formatShortMonthDay(model.settings.lastFetchTime)}'),
                   onTap: () async {
@@ -159,18 +160,18 @@ class _HomePageBody extends StatelessWidget {
                       await model.fetchFromNetwork();
                       showMessage(
                         context: context,
-                        message: 'Расписание успешно обновлено',
+                        message: context.l10n.snackbarCacheRefreshResultSuccess,
                       );
                     } catch (e) {
                       showMessage(
                         context: context,
-                        message: 'Ошибка обновления расписания',
+                        message: context.l10n.snackbarCacheRefreshResultFailure,
                       );
                     }
                   },
                 ),
                 SwitchListTile(
-                  title: Text('Показать расписание на выходные'),
+                  title: Text(context.l10n.labelShowHolidaySchedule),
                   value: model.scheduleType == ScheduleType.holiday,
                   activeColor: theme.accentColor,
                   contentPadding: EdgeInsets.only(left: 16.0, right: 8.0),
@@ -178,7 +179,7 @@ class _HomePageBody extends StatelessWidget {
                       v ? ScheduleType.holiday : ScheduleType.normal,
                 ),
                 CheckboxListTile(
-                  title: Text('Автообновление'),
+                  title: Text(context.l10n.labelAutoupdate),
                   value: model.settings.autoUpdate ?? false,
                   activeColor: theme.accentColor,
                   contentPadding: EdgeInsets.only(left: 16.0, right: 8.0),
@@ -186,7 +187,7 @@ class _HomePageBody extends StatelessWidget {
                 ),
                 ListTile(
                   trailing: Icon(Icons.lightbulb_outline),
-                  title: Text('Сменить тему'),
+                  title: Text(context.l10n.labelChangeBrightness),
                   onTap: () {
                     final currentBrightness = model.settings.brightness ??
                         MediaQuery.of(context).platformBrightness;
@@ -214,9 +215,9 @@ class _HomePageBody extends StatelessWidget {
                 child: DiscoverableFeature(
                   key: stationInfoDiscoverableKey,
                   featureKey: 'station-info',
-                  title: 'Информация о поездах',
+                  title: context.l10n.featureDiscoveryStationInfoTitle,
                   description:
-                      'Здесь показывается время до прибытия следующего позеда',
+                      context.l10n.featureDiscoveryStationInfoDescription,
                   child: StationInfo(),
                 ),
               ),
@@ -230,8 +231,8 @@ class _HomePageBody extends StatelessWidget {
           child: DiscoverableFeature(
             key: stationPickerDiscoverableKey,
             featureKey: 'station-picker',
-            title: 'Выберите станцию',
-            description: 'Нажмите, чтобы показать все станции',
+            title: context.l10n.featureDiscoveryStationPickerTitle,
+            description: context.l10n.featureDiscoveryStationInfoDescription,
             child: StationPicker(),
           ),
         ),
