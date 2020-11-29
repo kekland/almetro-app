@@ -1,5 +1,6 @@
 import 'package:almaty_metro/api/db.dart';
 import 'package:almaty_metro/l10n/delegate.dart';
+import 'package:almaty_metro/l10n/localization.dart';
 import 'package:almaty_metro/loading_page.dart';
 import 'package:almaty_metro/model/app_model.dart';
 import 'package:flutter/material.dart';
@@ -27,11 +28,11 @@ class MyApp extends StatelessWidget {
       ),
     );
 
+    final localizationDelegate = AlmetroLocalizations.delegate;
     return ChangeNotifierProvider(
       create: (context) => AppModel(),
       builder: (context, child) {
         final model = context.watch<AppModel>();
-        final localizationDelegate = AlmetroLocalizationDelegate();
 
         return MaterialApp(
           title: 'Almetro',
@@ -41,13 +42,13 @@ class MyApp extends StatelessWidget {
             localizationDelegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: localizationDelegate.locales,
           localeResolutionCallback: (locale, list) {
             if (list.contains(locale)) return locale;
             return Locale('ru');
           },
+          locale: Locale('kk'),
           theme: ThemeData(
             primaryColor: accentRed,
             accentColor: accentRed,

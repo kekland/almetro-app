@@ -145,8 +145,8 @@ class _HomePageBody extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text('Версия Almetro'),
-                  subtitle: Text('v0.1.0'),
+                  title: Text(context.l10n.labelAppVersion),
+                  subtitle: Text('v0.1.2'),
                   trailing: Icon(Icons.verified_user_outlined),
                 ),
                 Spacer(),
@@ -154,7 +154,7 @@ class _HomePageBody extends StatelessWidget {
                   trailing: Icon(Icons.cached_rounded),
                   title: Text(context.l10n.labelRefreshCache),
                   subtitle: Text(
-                      'Обновлено: ${MaterialLocalizations.of(context).formatShortMonthDay(model.settings.lastFetchTime)}'),
+                      '${context.l10n.labelLastCacheRefresh}: ${MaterialLocalizations.of(context).formatShortMonthDay(model.settings.lastFetchTime)}'),
                   onTap: () async {
                     try {
                       await model.fetchFromNetwork();

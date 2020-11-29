@@ -1,7 +1,8 @@
 import 'package:almaty_metro/api/model/station.dart';
+import 'package:almaty_metro/l10n/delegate.dart';
 import 'package:flutter/material.dart';
 
-class AlmetroLocalization {
+class AlmetroLocalizations {
   final Locale locale;
   final String featureDiscoveryGpsDescription;
   final String featureDiscoveryGpsTitle;
@@ -32,7 +33,7 @@ class AlmetroLocalization {
   final String snackbarCacheRefreshResultSuccess;
   final String snackbarGpsResultSuccess;
 
-  AlmetroLocalization({
+  AlmetroLocalizations({
     @required this.locale,
     @required this.featureDiscoveryGpsDescription,
     @required this.featureDiscoveryGpsTitle,
@@ -64,11 +65,11 @@ class AlmetroLocalization {
     @required this.snackbarGpsResultSuccess,
   });
 
-  static AlmetroLocalization fromJson({
+  static AlmetroLocalizations fromJson({
     @required Map<String, dynamic> json,
     @required Locale locale,
   }) {
-    return AlmetroLocalization(
+    return AlmetroLocalizations(
       locale: locale,
       featureDiscoveryGpsDescription: json['featureDiscoveryGpsDescription'],
       featureDiscoveryGpsTitle: json['featureDiscoveryGpsTitle'],
@@ -107,9 +108,14 @@ class AlmetroLocalization {
     );
   }
 
-  static AlmetroLocalization of(BuildContext context) {
-    return Localizations.of<AlmetroLocalization>(context, AlmetroLocalization);
+  static AlmetroLocalizations of(BuildContext context) {
+    return Localizations.of<AlmetroLocalizations>(
+      context,
+      AlmetroLocalizations,
+    );
   }
+
+  static AlmetroLocalizationsDelegate delegate = AlmetroLocalizationsDelegate();
 
   String getSubwayStationName(SubwayStation station) {
     return station.name.resolveFromLocale(locale);
@@ -117,5 +123,5 @@ class AlmetroLocalization {
 }
 
 extension Localization on BuildContext {
-  AlmetroLocalization get l10n => AlmetroLocalization.of(this);
+  AlmetroLocalizations get l10n => AlmetroLocalizations.of(this);
 }

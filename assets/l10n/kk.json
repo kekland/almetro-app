@@ -22,7 +22,7 @@
   "labelShowingHolidaySchedule": "Демалыс күнге кесте көрсетілуде",
   "labelStation": "Станция",
   "labelToday": "Бүгін",
-  "labelToStation": "Келесі станция",
+  "labelToStation": "станциясына",
   "labelTryAgain": "Қайталап көру",
   "snackbarCacheRefreshResultFailure": "Кестені жүктеу кезінде қате кетті",
   "snackbarCacheRefreshResultSuccess": "Кесте жаңартылды",

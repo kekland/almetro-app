@@ -36,9 +36,14 @@ class StationInfo extends StatelessWidget {
                               children: [
                                 Text.rich(
                                   TextSpan(
-                                    text: '${context.l10n.labelToStation} ',
                                     style: textTheme.caption,
                                     children: [
+                                      if (context.l10n.locale.languageCode !=
+                                          'kk')
+                                        TextSpan(
+                                          text:
+                                              '${context.l10n.labelToStation} ',
+                                        ),
                                       TextSpan(
                                         text: context.l10n.getSubwayStationName(
                                           model.subwayLine.getStationWithId(k),
@@ -47,6 +52,12 @@ class StationInfo extends StatelessWidget {
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
+                                      if (context.l10n.locale.languageCode ==
+                                          'kk')
+                                        TextSpan(
+                                          text:
+                                              ' ${context.l10n.labelToStation}',
+                                        ),
                                     ],
                                   ),
                                 ),
