@@ -78,6 +78,7 @@ class AppModel extends ChangeNotifier {
 
   Future<void> loadFromCache([bool notify = true]) async {
     final cache = settings.cachedData;
+    
     if (cache == null) {
       return;
     }

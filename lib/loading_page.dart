@@ -1,9 +1,9 @@
 import 'package:almaty_metro/home_page.dart';
 import 'package:almaty_metro/l10n/localization.dart';
 import 'package:almaty_metro/model/app_model.dart';
+import 'package:almaty_metro/widgets/app_logo.dart';
 import 'package:almaty_metro/widgets/transitions/circular_reveal_page_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class LoadingPage extends StatefulWidget {
@@ -61,8 +61,7 @@ class _LoadingPageState extends State<LoadingPage> {
             ),
             Hero(
               tag: 'app_logo',
-              child: SvgPicture.asset(
-                'assets/icon.svg',
+              child: AppLogo(
                 height: 80.0,
               ),
             ),

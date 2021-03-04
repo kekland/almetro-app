@@ -28,6 +28,8 @@ class SubwayStationName {
         return kk;
       case 'en':
         return en;
+      case 'de':
+        return en;
       default:
         return resolveFromLocale(fallbackLocale);
     }

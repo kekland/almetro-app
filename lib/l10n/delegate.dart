@@ -10,6 +10,7 @@ class AlmetroLocalizationsDelegate
     Locale('ru'),
     Locale('en'),
     Locale('kk'),
+    Locale('de'),
   ];
 
   @override

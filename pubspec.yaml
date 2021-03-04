@@ -28,7 +28,6 @@ dependencies:
   http:
   provider:
   shared_preferences:
-  flutter_svg: ^0.19.1
   circular_reveal_animation:
   feature_discovery:
   geolocator:
@@ -66,6 +65,7 @@ flutter:
 
   assets:
     - assets/icon.svg
+    - assets/icon-raster.png
     - assets/l10n/
 
   # To add assets to your application, add an assets section, like this:

@@ -1,6 +1,7 @@
 import 'package:almaty_metro/api/api.dart';
 import 'package:almaty_metro/l10n/localization.dart';
 import 'package:almaty_metro/utils/snackbar.dart';
+import 'package:almaty_metro/widgets/app_logo.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature.dart';
 import 'package:almaty_metro/widgets/feature_discovery/feature_discovery_manager.dart';
 import 'package:almaty_metro/widgets/holiday_card.dart';
@@ -11,7 +12,6 @@ import 'package:almaty_metro/widgets/station_info.dart';
 import 'package:almaty_metro/widgets/station_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -66,8 +66,7 @@ class _HomePageBody extends StatelessWidget {
             alignment: Alignment.center,
             child: Hero(
               tag: 'app_logo',
-              child: SvgPicture.asset(
-                'assets/icon.svg',
+              child: AppLogo(
                 height: 24.0,
               ),
             ),

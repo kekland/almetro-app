@@ -24,6 +24,102 @@ abstract class Api {
 }
 
 class AlmetroApi implements Api {
+  @override
+  Future<Map<String, dynamic>> downloadSubwayData() async {
+    final response = await http.get('http://209.182.216.197:5134/data/');
+    return jsonDecode(response.body);
+  }
+
+  Time _parseTime(String line) {
+    final data = line.split(':');
+    return Time(
+      hour: int.parse(data[0]),
+      minute: int.parse(data[1]),
+      second: int.parse(data[2]),
+    );
+  }
+
+  SubwayData _getSubwayDataFromResponse(
+    Map<String, dynamic> response,
+    ScheduleType type,
+  ) {
+    final scheduleData = response['schedules']
+        [type == ScheduleType.normal ? 'normal' : 'holiday'];
+
+    final stations = response['stations']
+        .map(
+          (v) => SubwayStation(
+            id: int.parse(v['id']),
+            order: v['order'],
+            latitude: v['position']['latitude'],
+            longitude: v['position']['longitude'],
+            name: SubwayStationName(
+              en: v['name']['name_en'],
+              ru: v['name']['name_ru'],
+              kk: v['name']['name_kz'],
+            ),
+            connections: {},
+            schedule: {},
+          ),
+        )
+        .cast<SubwayStation>()
+        .toList();
+
+    for (final station in stations) {
+      for (final connection in scheduleData[station.id.toString()]) {
+        if (connection['to'].isEmpty) continue;
+
+        final to = int.parse(connection['to']);
+        final schedule = (connection['schedule'])
+            .cast<String>()
+            .map(_parseTime)
+            .cast<Time>()
+            .toList();
+        station.populateSchedule(stationId: to, schedule: schedule);
+      }
+    }
+
+    final line = SubwayLine(
+      id: 0,
+      stations: stations,
+      segments: [],
+    );
+
+    line.stations.sort((a, b) => b.order - a.order);
+
+    return SubwayData(
+      lines: [line],
+      lineConnections: {},
+    );
+  }
+
+  @override
+  Subway getSubwayFromResponse(Map<String, dynamic> response) {
+    return Subway(
+      holidays: response['holidays']
+          .map(
+            (holiday) => Tuple2(
+              DateTime.parse(holiday['date']),
+              holiday['name'] as String,
+            ),
+          )
+          .cast<Tuple2<DateTime, String>>()
+          .toList(),
+      schedules: {
+        ScheduleType.normal: _getSubwayDataFromResponse(
+          response,
+          ScheduleType.normal,
+        ),
+        ScheduleType.holiday: _getSubwayDataFromResponse(
+          response,
+          ScheduleType.holiday,
+        ),
+      },
+    );
+  }
+}
+
+class MetroWithArtsApi implements Api {
   Future<Map<String, dynamic>> downloadSubwayData() async {
     final response = await http.get(
       'http://metro.witharts.kz/metro/api/0/all',
