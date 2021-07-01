@@ -6,8 +6,10 @@ import 'package:almaty_metro/model/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../api/api.dart';
+
 class AppModel extends ChangeNotifier {
-  final api = AlmetroApi();
+  final api = MetroWithArtsApi();
   final settings = AppSettings();
 
   Subway subway;
@@ -78,7 +80,7 @@ class AppModel extends ChangeNotifier {
 
   Future<void> loadFromCache([bool notify = true]) async {
     final cache = settings.cachedData;
-    
+
     if (cache == null) {
       return;
     }

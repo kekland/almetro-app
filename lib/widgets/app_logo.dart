@@ -11,7 +11,7 @@ class AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       'assets/icon-raster.png',
-      height: 24.0,
+      height: height,
     );
   }
 }

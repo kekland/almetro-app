@@ -62,7 +62,7 @@ class _LoadingPageState extends State<LoadingPage> {
             Hero(
               tag: 'app_logo',
               child: AppLogo(
-                height: 80.0,
+                height: 48.0,
               ),
             ),
             AnimatedOpacity(
