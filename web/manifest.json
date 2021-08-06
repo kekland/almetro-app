@@ -1,11 +1,11 @@
 {
-    "name": "almetro_app",
-    "short_name": "almetro_app",
+    "name": "Almetro",
+    "short_name": "Almetro",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#E53935",
+    "theme_color": "#E53935",
+    "description": "Almetro - an app for tracking subways in Almaty.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
