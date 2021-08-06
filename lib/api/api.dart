@@ -26,7 +26,10 @@ abstract class Api {
 class AlmetroApi implements Api {
   @override
   Future<Map<String, dynamic>> downloadSubwayData() async {
-    final response = await http.get('http://almetro.keklan/data/');
+    final response = await http.get(
+      Uri.parse('https://api.almetro.kekland.com/data/'),
+    );
+
     return jsonDecode(response.body);
   }
 
@@ -122,7 +125,7 @@ class AlmetroApi implements Api {
 class MetroWithArtsApi implements Api {
   Future<Map<String, dynamic>> downloadSubwayData() async {
     final response = await http.get(
-      'https://api.almetro.kekland.com/data/original',
+      Uri.parse('https://api.almetro.kekland.com/data/original'),
       headers: {
         'X-Requested-With': 'com.witharts.metro',
       },

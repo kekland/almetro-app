@@ -54,7 +54,7 @@ class AppModel extends ChangeNotifier {
 
     if (subway != null) notifyListeners();
 
-    if (subway == null || settings.autoUpdate) {
+    if (subway == null || !settings.autoUpdate) {
       await fetchFromNetwork();
     }
   }
@@ -65,7 +65,6 @@ class AppModel extends ChangeNotifier {
 
     try {
       final response = await api.downloadSubwayData();
-
       setSubway(api.getSubwayFromResponse(response));
 
       settings.cachedData = json.encode(response);
@@ -120,7 +119,7 @@ class AppModel extends ChangeNotifier {
     _selectedStation =
         id != null ? subwayLine.getStationWithId(id) : subwayLine.stations[0];
 
-    settings.lastStationId = id;
+    settings.lastStationId = _selectedStation.id;
   }
 
   SubwayStation getClosestStation(Position position) {

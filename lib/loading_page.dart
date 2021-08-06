@@ -56,6 +56,7 @@ class _LoadingPageState extends State<LoadingPage> {
                 height: 160.0,
                 child: CircularProgressIndicator(
                   strokeWidth: 6.0,
+                  color: theme.primaryColor,
                 ),
               ),
             ),

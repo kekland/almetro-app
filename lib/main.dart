@@ -44,10 +44,12 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: localizationDelegate.locales,
           localeResolutionCallback: (locale, list) {
-            if (list.contains(locale)) return locale;
+            if (list.any((v) => v.languageCode == locale.languageCode)) {
+              return locale;
+            }
+
             return Locale('ru');
           },
-          locale: Locale('ru'),
           theme: ThemeData(
             primaryColor: accentRed,
             accentColor: accentRed,

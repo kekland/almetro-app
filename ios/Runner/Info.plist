@@ -21,6 +21,7 @@
 		<string>en</string>
 		<string>ru</string>
 		<string>kk</string>
+		<string>de</string>
 	</array>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
