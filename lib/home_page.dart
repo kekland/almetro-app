@@ -145,7 +145,7 @@ class _HomePageBody extends StatelessWidget {
                 ),
                 ListTile(
                   title: Text(context.l10n.labelAppVersion),
-                  subtitle: Text('v0.1.4'),
+                  subtitle: Text('v0.1.5'),
                   trailing: Icon(Icons.verified_user_outlined),
                 ),
                 Spacer(),
